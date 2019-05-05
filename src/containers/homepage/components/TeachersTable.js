@@ -11,7 +11,7 @@ class TeachersTable extends Component {
                 <table className="Table">
                     <thead>
                     <tr>
-                        <th>Tên Giảng viên</th>
+                        <th>Tên giảng viên</th>
                         <th>Email</th>
                         <th>VNU Email</th>
                         <th>Điện thoại</th>

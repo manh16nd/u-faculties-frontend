@@ -16,7 +16,7 @@ class Header extends Component {
                     <Link to={'/'}>
                         <img className="Logo" src="images/uet.jpg" alt="UET-LOGO"/>
                     </Link>
-                    <span className="Title">Trường Đại học Công nghệ - uFaculties</span>
+                    <span className="Title">Trường Đại học Công nghệ uFaculties</span>
                 </div>
                 <div className="RightHeader">
                     <button className="Button" onClick={this._onClickLogin}>Đăng nhập</button>
