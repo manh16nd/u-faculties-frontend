@@ -1,0 +1,14 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+@import './header/index';
+@import './commons/index';
+@import './homepage/index';
+@import './login-modal/index';
+
+body, html, #root {
+    min-height: 100vh;
+    background: #F9FBFE;
+}
+
+button {
+    outline: none !important;
+}

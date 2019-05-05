@@ -1,28 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import AppContext from './AppContext'
+import HeaderContainer from './components/header/components/HeaderContainer'
+import {Switch, Route} from 'react-router-dom'
+import HomePageContainer from './containers/homepage/components/HomePageContainer'
+import LoginModalContainer from './components/login-modal/components/LoginModalContainer'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    state = {
+        user: {}
+    }
+
+    changeState = (changedState) => {
+        this.setState(changedState)
+    }
+
+    render() {
+        const {state, changeState} = this
+
+        return (
+            <AppContext.Provider
+                value={{
+                    app: state,
+                    changeState
+                }}
+            >
+                <HeaderContainer/>
+                <LoginModalContainer/>
+
+                <div className="container-fluid">
+                    <Switch>
+                        <Route exact path='/' component={HomePageContainer}/>
+                    </Switch>
+                </div>
+            </AppContext.Provider>
+        )
+    }
 }
 
-export default App;
+export default App

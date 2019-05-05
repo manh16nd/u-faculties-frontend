@@ -1,0 +1,75 @@
+.HomePage {
+    .LeftWrapper {
+        .TopTable {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                line-height: 48px;
+                margin: 0;
+            }
+
+            form {
+                width: 50%;
+                input {
+                    width: 100%;
+                    border: 1px solid #E0E9EF;
+                    border-radius: 20px;
+                    outline: none;
+                    padding: .375rem .75rem;
+                    transition: all .2s linear;
+
+                    &:focus {
+                        border-color: #004783;
+                        box-shadow: 0 13px 28px 0 rgba(0, 71, 131, 0.25);
+                    }
+                }
+            }
+        }
+    }
+
+    .RightWrapper {
+        display: block;
+
+        .FilterWrapper {
+            margin: 0;
+            width: 100%;
+            background: #fff;
+            line-height: 48px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+
+            span {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all .2s linear;
+                border: 1px solid #E0E9EF;
+                border-bottom: 0;
+                border-left: 0;
+
+                &:first-child {
+                    border-left: 1px solid #E0E9EF;
+                }
+
+                &:hover {
+                    color: #004783;
+                }
+            }
+
+            .Selected {
+                background: #004783;
+                color: #fff;
+                border-color: #004783;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+}
