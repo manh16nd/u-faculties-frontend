@@ -52,10 +52,10 @@ onChange = (param) => (e) => {
 - Viết service API mới như nào: Tôi đã viết sẵn method ở file `services/api/index.js`, để viết một API, ông sẽ `import {createApiService} from './index'`. Sau đó, với một API, ông chỉ cần 
 ```js
 return createApiService({
-url: '', // là url của API, đã bỏ đi domin
-method: 'get | post | patch | delete', // hoa thường đều được
-data: {}, // đây là body của API post hoặc delete hoặc patch
-params: {}, // đây là query của API get
+    url: '', // là url của API, đã bỏ đi domin
+    method: 'get | post | patch | delete', // hoa thường đều được
+    data: {}, // đây là body của API post hoặc delete hoặc patch
+    params: {}, // đây là query của API get
 })
 ```
 
