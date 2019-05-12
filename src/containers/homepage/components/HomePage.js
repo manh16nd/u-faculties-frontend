@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {getTeachers} from '../../../services/api/TeachersServices'
 import TeachersTable from './TeachersTable'
+import DepartmentsTable from './DepartmentsTable'
+import FieldsTable from './FieldsTable'
 import Filter from './Filter'
+import { getDepartments } from '../../../services/api/DepartmentsServices';
+import { getFields } from '../../../services/api/FieldsServices';
 
 class HomePage extends Component {
     state = {
@@ -14,13 +18,35 @@ class HomePage extends Component {
                 name: '',
             },
         },
+        departments: {
+            entity: [],
+            total: 0,
+            params: {
+                page: 1,
+                limit: 10,
+                name: '',
+            },
+        },
+        fields: {
+            entity: [],
+            total: 0,
+            params: {
+                page: 1,
+                limit: 10,
+                name: '',
+            },
+        },
         loading: {
             fetchTeachers: false,
+            fetchDepartments: false,
+            fetchFields: false,
         }
     }
 
     componentDidMount() {
         this._fetchTeachers()
+        this._fetchDepartments()
+        this._fetchFields()
     }
 
     _fetchTeachers = async () => {
@@ -51,6 +77,62 @@ class HomePage extends Component {
         if (!success) return alert(message)
     }
 
+    _fetchDepartments = async () => {
+        const {params} = this.state.departments
+        this.setState({
+            loading: {
+                fetchDepartments: true,
+            }
+        });
+
+        const {success, data, message} = await getDepartments(params)
+
+        const departmentsEntity = data ? {
+            entity: data.departments,
+            total: data.total,
+        } : {}
+        this.setState(({departments, loading}) => ({
+            loading: {
+                ...loading,
+                fetchDepartments: false,
+            },
+            departments: {
+                ...departments,
+                ...departmentsEntity,
+            },
+        }))
+
+        if (!success) return alert(message)
+    }
+
+    _fetchFields = async () => {
+        const {params} = this.state.fields
+        this.setState({
+            loading: {
+                fetchFields: true,
+            }
+        });
+
+        const {success, data, message} = await getFields(params)
+
+        const fieldsEntity = data ? {
+            entity: data.fields,
+            total: data.total,
+        } : {}
+        this.setState(({fields, loading}) => ({
+            loading: {
+                ...loading,
+                fetchFields: false,
+            },
+            fields: {
+                ...fields,
+                ...fieldsEntity,
+            },
+        }))
+
+        if(!success) return alert(message)
+    }
+
     _onChangeFilterName = (e) => {
         const {value} = e.target
         this.setState(({teachers}) => ({
@@ -60,6 +142,32 @@ class HomePage extends Component {
                     ...teachers.params,
                     name: value,
                 }
+            },
+        }))
+    }
+
+    _onChangeFilterNameDepartment = (e) => {
+        const {value} = e.target
+        this.setState(({departments}) => ({
+            departments: {
+                ...departments,
+                params: {
+                    ...departments.params,
+                    name: value,
+                }
+            }
+        }))
+    }
+
+    _onChangeFilterNameField = (e) => {
+        const {value} = e.target
+        this.setState(({fields}) => ({
+            fields: {
+                ...fields,
+                params: {
+                    ...fields.params,
+                    name: value,
+                }
             }
         }))
     }
@@ -67,10 +175,13 @@ class HomePage extends Component {
     _submitFilter = (e) => {
         e.preventDefault()
         this._fetchTeachers()
+        this._fetchDepartments()
+        this._fetchFields()
     }
 
     render() {
-        const {teachers} = this.state
+        const {teachers, departments, fields} = this.state
+
 
         return (
             <div className="HomePage row">
@@ -89,11 +200,59 @@ class HomePage extends Component {
                         <TeachersTable
                             teachers={teachers}
                         />
+                        
+
+                        {/* <DepartmentsTable
+                            departments={departments}
+                        /> */}
+
+                        {/* <TeachersTable
+                            teachers={teachers}
+                        /> */}
                     </div>
                 </div>
+
                 <div className="col-4 RightWrapper">
                     <Filter/>
                 </div>
+
+                <div className='col-8 LeftWrapper'>
+                    <div className="TopTable">
+                        <p>Tổng cộng có: {departments.total} khoa</p>
+                        <form onSubmit={this._submitFilter}>
+                            <input
+                                value={departments.params.name}
+                                onChange={this._onChangeFilterNameDepartment}
+                                placeholder="Tìm kiếm khoa theo tên"
+                            />
+                        </form>
+                    </div>
+                    <div className="TableWrapper">
+                        <DepartmentsTable
+                            departments={departments}
+                        />
+                    </div>
+                </div>
+
+                <div className='col-8 LeftWrapper'>
+                    <div className="TopTable">
+                        <p>Tổng cộng có: {fields.total} đề tài nghiên cứu</p>
+                        <form onSubmit={this._submitFilter}>
+                            <input
+                                value={fields.params.name}
+                                onChange={this._onChangeFilterNameField}
+                                placeholder="Tìm kiếm đề tài theo tên"
+                            />
+                        </form>
+                    </div>
+                    <div className="TableWrapper">
+                        <FieldsTable
+                            fields={fields}
+                        />
+                        {console.log("Cac de tai la: " + fields)}
+                    </div>
+                </div>
+
             </div>
         )
     }

@@ -22,9 +22,11 @@ a {
 .TableWrapper {
     overflow: auto;
     box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
+    
 
     .Table {
         width: 100%;
+        // margin: 15px;
 
         thead {
             border: 1px solid #E0E9EF;
