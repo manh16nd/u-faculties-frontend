@@ -4,8 +4,8 @@ import TeachersTable from './TeachersTable'
 import DepartmentsTable from './DepartmentsTable'
 import FieldsTable from './FieldsTable'
 import Filter from './Filter'
-import { getDepartments } from '../../../services/api/DepartmentsServices';
-import { getFields } from '../../../services/api/FieldsServices';
+import {getDepartments} from '../../../services/api/DepartmentsServices';
+import {getFields} from '../../../services/api/FieldsServices';
 
 class HomePage extends Component {
     state = {
@@ -130,7 +130,7 @@ class HomePage extends Component {
             },
         }))
 
-        if(!success) return alert(message)
+        if (!success) return alert(message)
     }
 
     _onChangeFilterName = (e) => {
@@ -182,74 +182,76 @@ class HomePage extends Component {
     render() {
         const {teachers, departments, fields} = this.state
 
-
         return (
-            <div className="HomePage row">
-                <div className='col-8 LeftWrapper'>
-                    <div className="TopTable">
-                        <p>Tổng cộng có: {teachers.total} giảng viên</p>
-                        <form onSubmit={this._submitFilter}>
-                            <input
-                                value={teachers.params.name}
-                                onChange={this._onChangeFilterName}
-                                placeholder="Tìm kiếm giảng viên theo tên"
+            <div className="HomePage">
+                <div className="row">
+                    <div className='col-8 LeftWrapper'>
+                        <div className="TopTable">
+                            <p>Tổng cộng có: {teachers.total} giảng viên</p>
+                            <form onSubmit={this._submitFilter}>
+                                <input
+                                    value={teachers.params.name}
+                                    onChange={this._onChangeFilterName}
+                                    placeholder="Tìm kiếm giảng viên theo tên"
+                                />
+                            </form>
+                        </div>
+                        <div className="TableWrapper">
+                            <TeachersTable
+                                teachers={teachers}
                             />
-                        </form>
-                    </div>
-                    <div className="TableWrapper">
-                        <TeachersTable
-                            teachers={teachers}
-                        />
-                        
 
-                        {/* <DepartmentsTable
+
+                            {/* <DepartmentsTable
                             departments={departments}
                         /> */}
 
-                        {/* <TeachersTable
+                            {/* <TeachersTable
                             teachers={teachers}
                         /> */}
+                        </div>
+                    </div>
+
+                    <div className="col-4 RightWrapper">
+                        <Filter/>
                     </div>
                 </div>
 
-                <div className="col-4 RightWrapper">
-                    <Filter/>
-                </div>
-
-                <div className='col-8 LeftWrapper'>
-                    <div className="TopTable">
-                        <p>Tổng cộng có: {departments.total} khoa</p>
-                        <form onSubmit={this._submitFilter}>
-                            <input
-                                value={departments.params.name}
-                                onChange={this._onChangeFilterNameDepartment}
-                                placeholder="Tìm kiếm khoa theo tên"
+                <div className="row">
+                    <div className='col-6 LeftWrapper'>
+                        <div className="TopTable">
+                            <p>Tổng cộng có: {departments.total} khoa</p>
+                            <form onSubmit={this._submitFilter}>
+                                <input
+                                    value={departments.params.name}
+                                    onChange={this._onChangeFilterNameDepartment}
+                                    placeholder="Tìm kiếm khoa theo tên"
+                                />
+                            </form>
+                        </div>
+                        <div className="TableWrapper">
+                            <DepartmentsTable
+                                departments={departments}
                             />
-                        </form>
+                        </div>
                     </div>
-                    <div className="TableWrapper">
-                        <DepartmentsTable
-                            departments={departments}
-                        />
-                    </div>
-                </div>
 
-                <div className='col-8 LeftWrapper'>
-                    <div className="TopTable">
-                        <p>Tổng cộng có: {fields.total} đề tài nghiên cứu</p>
-                        <form onSubmit={this._submitFilter}>
-                            <input
-                                value={fields.params.name}
-                                onChange={this._onChangeFilterNameField}
-                                placeholder="Tìm kiếm đề tài theo tên"
+                    <div className='col-6 LeftWrapper'>
+                        <div className="TopTable">
+                            <p>Tổng cộng có: {fields.total} đề tài nghiên cứu</p>
+                            <form onSubmit={this._submitFilter}>
+                                <input
+                                    value={fields.params.name}
+                                    onChange={this._onChangeFilterNameField}
+                                    placeholder="Tìm kiếm đề tài theo tên"
+                                />
+                            </form>
+                        </div>
+                        <div className="TableWrapper">
+                            <FieldsTable
+                                fields={fields}
                             />
-                        </form>
-                    </div>
-                    <div className="TableWrapper">
-                        <FieldsTable
-                            fields={fields}
-                        />
-                        {console.log("Cac de tai la: " + fields)}
+                        </div>
                     </div>
                 </div>
 
