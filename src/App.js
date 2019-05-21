@@ -1,13 +1,21 @@
 import React, {Component} from 'react'
-import AppContext from './AppContext'
-import HeaderContainer from './components/header/components/HeaderContainer'
 import {Switch, Route} from 'react-router-dom'
+
 import HomePageContainer from './containers/homepage/components/HomePageContainer'
+
+import HeaderContainer from './components/header/components/HeaderContainer'
 import LoginModalContainer from './components/login-modal/components/LoginModalContainer'
+
+import {getCookie} from './services/cookies'
+import AppContext from './AppContext'
 
 class App extends Component {
     state = {
-        user: {}
+        user: {
+            username: getCookie('username'),
+            type: getCookie('type'),
+            token: getCookie('token'),
+        }
     }
 
     changeState = (changedState) => {

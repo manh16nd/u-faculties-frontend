@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://u-faculties-backend.herokuapp.com'
+const baseUrl = process.env.REACT_APP_BACKEND || 'https://u-faculties-backend.herokuapp.com'
 
 export const createApiService = async ({url, method, data, params}) => {
     try {

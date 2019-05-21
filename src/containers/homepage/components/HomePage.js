@@ -200,15 +200,6 @@ class HomePage extends Component {
                             <TeachersTable
                                 teachers={teachers}
                             />
-
-
-                            {/* <DepartmentsTable
-                            departments={departments}
-                        /> */}
-
-                            {/* <TeachersTable
-                            teachers={teachers}
-                        /> */}
                         </div>
                     </div>
 

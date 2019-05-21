@@ -1,14 +1,22 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import UserMenuContainer from '../../user-menu/components/UserMenuContainer'
 
 class Header extends Component {
     _onClickLogin = () => {
-        this.props.changeState({
+        const {user} = this.props.app
+
+        if (!user || !user.username) return this.props.changeState({
             loginModal: true,
+        })
+
+        return this.props.changeState({
+            userMenu: true,
         })
     }
 
     render() {
+        const {user} = this.props.app
 
         return (
             <div className="Header">
@@ -19,7 +27,11 @@ class Header extends Component {
                     <span className="Title">Trường Đại học Công nghệ uFaculties</span>
                 </div>
                 <div className="RightHeader">
-                    <button className="Button" onClick={this._onClickLogin}>Đăng nhập</button>
+                    <div className="ButtonWrapper">
+                        <button className="Button"
+                                onClick={this._onClickLogin}>{user ? user.username || 'Đăng nhập' : 'Đăng nhập'}</button>
+                    </div>
+                    <UserMenuContainer/>
                 </div>
             </div>
         )

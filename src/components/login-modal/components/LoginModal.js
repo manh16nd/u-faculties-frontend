@@ -1,21 +1,47 @@
 import React, {Component} from 'react'
 import classnames from 'classnames'
+import {login} from '../../../services/api/AuthServices'
+import {setCookie} from '../../../services/cookies'
 
 class LoginModal extends Component {
+    state = {
+        username: '',
+        password: '',
+        err: '',
+        loading: false,
+    }
+
     _close = () => {
-        console.log('close')
         this.props.changeState({
             loginModal: false,
         })
     }
 
-    updateEmail(value) {
+    _submitLogin = async (e) => {
+        e.preventDefault()
+        const {username, password} = this.state
+        this.setState({loading: true})
+        const {success, data, message} = await login({username, password})
+        this.props.changeState({user: {...data}, loginModal: !success})
+        this.setState({loading: false, err: message})
+        if (success) {
+            const {token, type, username} = data
+            setCookie('token', token)
+            setCookie('type', type)
+            setCookie('username', username)
+        }
+    }
+
+    _onChangeInput = (key) => (e) => {
+        const {value} = e.target
         this.setState({
-            email: value,
-        });
+            [key]: value,
+        })
+
     }
 
     render() {
+        const {username, password, err} = this.state
         const {app} = this.props
 
         return (
@@ -24,31 +50,31 @@ class LoginModal extends Component {
                 <div className={classnames('LoginWrapper', {
                     'Off': !app.loginModal,
                 })}>
-                    <div className="ModalTitle">
-                        <span className="Title">Đăng nhập</span>
-                        <span className="CloseButton" onClick={this._close}>
+                    <form onSubmit={this._submitLogin}>
+                        <div className="ModalTitle">
+                            <span className="Title">Đăng nhập</span>
+                            <span className="CloseButton" onClick={this._close}>
                         <span className="ti-close"/>
                         </span>
-                    </div>
-                    <div className="ModalBody">
-                        <div className="Form">
-                            <label htmlFor="username">Tài khoản</label>
-                            <input 
-                                className="ModalInput" 
-                                id="username" 
-                                autoComplete="off" 
-                                onChange={(event) => {this.updateEmail(event.target.value)}}
-                                // value={this.state.email}
-                            />
+
                         </div>
-                        <div className="Form">
-                            <label htmlFor="password">Mật khẩu</label>
-                            <input className="ModalInput" id="password" type="password" autoComplete="off"/>
+                        <div className="ModalBody">
+                            <div className="text-danger">{err}</div>
+                            <div className="Form">
+                                <label htmlFor="username">Tài khoản</label>
+                                <input className="ModalInput" id="username" autoComplete="off" value={username}
+                                       onChange={this._onChangeInput('username')}/>
+                            </div>
+                            <div className="Form">
+                                <label htmlFor="password">Mật khẩu</label>
+                                <input className="ModalInput" id="password" type="password" autoComplete="off"
+                                       value={password} onChange={this._onChangeInput('password')}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="ModalFooter">
-                        <button className="Button">Đăng nhập</button>
-                    </div>
+                        <div className="ModalFooter">
+                            <button className="Button" type="submit">Đăng nhập</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         )

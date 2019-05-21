@@ -1,0 +1,22 @@
+.UserMenu {
+    position: absolute;
+    margin-top: .25rem;
+    min-width: 100%;
+    background: #fff;
+    z-index: 10;
+    box-shadow: 0 13px 28px 0 rgba(0, 71, 131, 0.25);
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+
+    .Menu {
+        padding: .375rem .85rem;
+        width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            background: #E5E5E5;
+        }
+    }
+}
