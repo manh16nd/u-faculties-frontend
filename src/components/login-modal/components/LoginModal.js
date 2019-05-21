@@ -9,6 +9,12 @@ class LoginModal extends Component {
         })
     }
 
+    updateEmail(value) {
+        this.setState({
+            email: value,
+        });
+    }
+
     render() {
         const {app} = this.props
 
@@ -27,7 +33,13 @@ class LoginModal extends Component {
                     <div className="ModalBody">
                         <div className="Form">
                             <label htmlFor="username">Tài khoản</label>
-                            <input className="ModalInput" id="username" autoComplete="off"/>
+                            <input 
+                                className="ModalInput" 
+                                id="username" 
+                                autoComplete="off" 
+                                onChange={(event) => {this.updateEmail(event.target.value)}}
+                                // value={this.state.email}
+                            />
                         </div>
                         <div className="Form">
                             <label htmlFor="password">Mật khẩu</label>
