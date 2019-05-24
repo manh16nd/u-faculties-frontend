@@ -37,6 +37,7 @@ class LoginModal extends Component {
         this.setState({
             [key]: value,
         })
+
     }
 
     render() {
@@ -55,6 +56,7 @@ class LoginModal extends Component {
                             <span className="CloseButton" onClick={this._close}>
                         <span className="ti-close"/>
                         </span>
+
                         </div>
                         <div className="ModalBody">
                             <div className="text-danger">{err}</div>
