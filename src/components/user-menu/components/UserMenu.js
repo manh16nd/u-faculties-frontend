@@ -5,9 +5,6 @@ class UserMenu extends Component {
 
         return (
             <div className="UserMenu">
-                <div className="Menu">
-                    Sign out
-                </div>
             </div>
         )
     }

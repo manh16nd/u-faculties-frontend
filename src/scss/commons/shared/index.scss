@@ -19,10 +19,33 @@ a {
     color: #004783;
 }
 
+.PageTitle {
+    font-weight: 300;
+
+    .BackButton {
+        margin-right: 1rem;
+        text-decoration: none;
+    }
+}
+
+.UserButton {
+    padding: .5rem 1rem;
+    background: #fff;
+    border: 1px solid #004783;
+    border-radius: .25rem;
+    transition: all .2s linear;
+
+    &:hover {
+        background: #004783;
+        box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
+        color: #fff;
+    }
+}
+
 .TableWrapper {
     overflow: auto;
     box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
-    
+
 
     .Table {
         width: 100%;
@@ -34,7 +57,7 @@ a {
             tr {
                 th {
                     max-width: 100%;
-                    white-space:nowrap;
+                    white-space: nowrap;
                     text-align: center;
                     color: #004783;
                     background: #fff;
@@ -56,7 +79,7 @@ a {
             tr {
                 td {
                     max-width: 100%;
-                    white-space:nowrap;
+                    white-space: nowrap;
                     text-align: center;
                     color: #000;
                     background: #fff;
