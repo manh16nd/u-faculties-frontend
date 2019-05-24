@@ -114,6 +114,7 @@ a {
         }
 
         .FixedColumn {
+            box-sizing: border-box;
             left: 0;
             position: sticky;
             top: auto;

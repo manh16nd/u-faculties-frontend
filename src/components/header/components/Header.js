@@ -28,6 +28,10 @@ class Header extends Component {
                 </div>
                 <div className="RightHeader">
                     <div className="ButtonWrapper">
+                        {!!user.token && <Link to={'/user'}>
+                            <button className="Button mr-2">Quản lý
+                            </button>
+                        </Link>}
                         <button className="Button"
                                 onClick={this._onClickLogin}>{user ? user.username || 'Đăng nhập' : 'Đăng nhập'}</button>
                     </div>
