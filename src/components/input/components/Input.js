@@ -12,7 +12,7 @@ const Input = function (props) {
     return (
         <div className="Input">
             <label htmlFor={id}>{label}</label>
-            <input onChange={change} id={id} value={value} />
+            <input onChange={change} id={id} value={value} autoComplete="off" />
         </div>
     )
 }

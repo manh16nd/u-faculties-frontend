@@ -1,8 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../../../components/input/components/Input';
+import { getCurrentTeacherInfo } from '../../../services/api/AuthServices';
 
 const TeacherInfo = function (props) {
     const [state, changeState] = useState({ user: {} })
+
+    useEffect(() => {
+        getCurrentTeacher()
+    }, [])
+
+    const getCurrentTeacher = async () => {
+        const { success, data, message } = await getCurrentTeacherInfo()
+        console.log(data)
+    }
 
     const onChangeInput = (key) => (v) => {
         const { user } = state

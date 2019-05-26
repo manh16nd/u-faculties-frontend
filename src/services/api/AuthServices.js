@@ -14,3 +14,10 @@ export const verifyUser = () => {
         url: '/auth/verify',
     })
 }
+
+export const getCurrentTeacherInfo = () => {
+    return createAuthApiService({
+        method: 'get',
+        url: '/auth/teacherInfo'
+    })
+}
