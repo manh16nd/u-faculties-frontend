@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import UserMenuContainer from '../../user-menu/components/UserMenuContainer'
 
 class Header extends Component {
     _onClickLogin = () => {
-        const {user} = this.props.app
+        const { user } = this.props.app
 
-        if (!user || !user.username) return this.props.changeState({
+        if (!user || !user.token) return this.props.changeState({
             loginModal: true,
         })
 
@@ -16,13 +16,13 @@ class Header extends Component {
     }
 
     render() {
-        const {user} = this.props.app
+        const { user } = this.props.app
 
         return (
             <div className="Header">
                 <div className="LeftHeader">
                     <Link to={'/'}>
-                        <img className="Logo" src="images/uet.jpg" alt="UET-LOGO"/>
+                        <img className="Logo" src="images/uet.jpg" alt="UET-LOGO" />
                     </Link>
                     <span className="Title">Trường Đại học Công nghệ uFaculties</span>
                 </div>
@@ -33,9 +33,9 @@ class Header extends Component {
                             </button>
                         </Link>}
                         <button className="Button"
-                                onClick={this._onClickLogin}>{user ? user.username || 'Đăng nhập' : 'Đăng nhập'}</button>
+                            onClick={this._onClickLogin}>{user && user.token ? user.username || 'Đăng nhập' : 'Đăng nhập'}</button>
                     </div>
-                    <UserMenuContainer/>
+                    <UserMenuContainer />
                 </div>
             </div>
         )

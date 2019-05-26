@@ -1,8 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
+import { getCookie } from '../../../services/cookies'
+import { getTeacherTopics } from '../../../services/api/TeachersServices';
 
 const TeacherTopics = function (props) {
     const [tab, changeTab] = useState(0)
+    const [topics, changeTopics] = useState({
+        page: 1,
+        limit: 0,
+        data: [],
+        total: 0,
+    })
+
+    useEffect(() => {
+        _fetchTopics()
+    }, [])
+
+    const _fetchTopics = async () => {
+        const teacherId = getCookie('teacher')
+        if (!teacherId) return null
+
+        const { page, limit } = topics
+        const { success, data, message } = await getTeacherTopics({ teacherId, params: { page, limit } })
+        console.log(success, data, message)
+    }
 
     const _changeTab = (value) => () => {
         changeTab(value)

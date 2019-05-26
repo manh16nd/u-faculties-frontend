@@ -25,3 +25,11 @@ export const editTeacherInfo = ({ teacherId, data }) => {
         data,
     })
 }
+
+export const getTeacherTopics = ({ teacherId, params }) => {
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/topics`,
+        method: 'get',
+        params,
+    })
+}
