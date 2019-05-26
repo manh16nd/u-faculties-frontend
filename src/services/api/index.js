@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {getCookie, removeCookie} from '../cookies'
+import { getCookie, removeCookie } from '../cookies'
 
 const baseUrl = process.env.REACT_APP_BACKEND || 'https://u-faculties-backend.herokuapp.com'
 
-export const createApiService = async ({url, method, data, params}) => {
+export const createApiService = async ({ url, method, data, params }) => {
     try {
         const resp = await axios({
             url: `${baseUrl}${url}`,
@@ -21,7 +21,7 @@ export const createApiService = async ({url, method, data, params}) => {
     }
 }
 
-export const createAuthApiService = async ({url, method, data, params}) => {
+export const createAuthApiService = async ({ url, method, data, params }) => {
     const Authorization = getCookie('token')
 
     try {
@@ -30,12 +30,12 @@ export const createAuthApiService = async ({url, method, data, params}) => {
             method,
             data,
             params,
-            headers: {Authorization}
+            headers: { Authorization }
         })
 
         return resp.data
     } catch (e) {
-        const {response} = e
+        const { response } = e
         if (response.status === 403) {
             removeCookie('token')
             removeCookie('username')

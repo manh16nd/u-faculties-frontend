@@ -1,0 +1,62 @@
+.TeacherModal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, .5);
+
+    .ModalWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        min-width: 50%;
+        background: #fff;
+        box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+        border-radius: .25rem;
+
+        .ModalHeader {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #E0E9EF;
+
+            .ModelTitle {
+                font-weight: 100;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+            }
+
+            .CloseButton {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5rem;
+                cursor: pointer;
+
+                i {
+                    padding: .25rem;
+                    border-radius: 2rem;
+                }
+
+                &:hover {
+
+                    i {
+                        box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
+                    }
+                }
+            }
+        }
+
+        .ModalBody {
+            width: 100%;
+            min-height: 50px;
+            padding: 1rem;
+        }
+    }
+}

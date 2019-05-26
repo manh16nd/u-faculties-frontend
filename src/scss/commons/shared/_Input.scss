@@ -1,0 +1,21 @@
+.Input {
+    margin-bottom: .5rem;
+
+    label {
+        width: 100%;
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        border: 1px solid #ccc;
+        transition: all .2s linear;
+
+        &:focus {
+            border-color: #004783;
+            box-shadow: 0 13px 28px 0 rgba(0, 71, 131, 0.25);
+        }
+    }
+}
