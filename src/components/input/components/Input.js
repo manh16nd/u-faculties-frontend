@@ -7,14 +7,19 @@ const Input = function (props) {
         props.onChange(value)
     }
 
-    const { value, label, id } = props
+    const { value, label, id, type, required } = props
 
     return (
         <div className="Input">
             <label htmlFor={id}>{label}</label>
-            <input onChange={change} id={id} value={value} autoComplete="off" />
+            <input onChange={change} id={id} value={value} autoComplete="off" type={type} required={required} />
         </div>
     )
+}
+
+Input.defaultProps = {
+    required: false,
+    type: 'text',
 }
 
 Input.propTypes = {
@@ -22,6 +27,8 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    type: PropTypes.string,
+    required: PropTypes.bool,
 }
 
 export default Input

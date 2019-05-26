@@ -17,6 +17,12 @@ const TeacherHomepage = function (props) {
                                 <span className="Text">Cập nhật thông tin cá nhân</span>
                             </Link>
                         </div>
+                        <div className="SectionLink">
+                            <Link to={'/changePassword'}>
+                                <i className="ti-arrow-right ArrowIcon" />
+                                <span className="Text">Đổi mật khẩu</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div className="Section">

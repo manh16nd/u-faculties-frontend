@@ -21,8 +21,11 @@ export const createApiService = async ({ url, method, data, params }) => {
     }
 }
 
-export const createAuthApiService = async ({ url, method, data, params }) => {
+export const createAuthApiService = async ({ url, method, data, params, contentType }) => {
     const Authorization = getCookie('token')
+    const content = contentType ? {
+        'Content-Type': contentType
+    } : {}
 
     try {
         const resp = await axios({
@@ -30,7 +33,7 @@ export const createAuthApiService = async ({ url, method, data, params }) => {
             method,
             data,
             params,
-            headers: { Authorization }
+            headers: { Authorization, ...content }
         })
 
         return resp.data
