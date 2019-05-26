@@ -14,7 +14,15 @@ class Teachers extends Component {
         },
         current: {
             open: false,
-            teacher: {},
+            teacher: {
+                address: '',
+                degree: '',
+                name: '',
+                phone: '',
+                position: '',
+                vnuEmail: '',
+                website: ''
+            },
         }
     }
 
