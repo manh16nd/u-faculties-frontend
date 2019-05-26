@@ -1,0 +1,27 @@
+.TeacherTopics {
+    .FieldsWrapper {
+        margin: 1.5rem 0;
+
+        .Tabs {
+            display: flex;
+            width: 100%;
+
+            .Tab {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                color: #004783;
+                padding: 1rem;
+                cursor: pointer;
+                transition: all .2s linear;
+            }
+
+            .Focus {
+                background: #004783;
+                color: #fff;
+            }
+        }
+    }
+}
