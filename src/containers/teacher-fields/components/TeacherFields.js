@@ -44,7 +44,9 @@ const TeacherFields = function (props) {
             <div className="Card">
                 <div className="CardHeader">Cập nhật lĩnh vực nghiên cứu</div>
                 <div className="CardBody">
-                    {fields.data.map((field) => formatField(field))}
+                    <div className="Fields">
+                        {fields.data.map((field) => formatField(field))}
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import TeacherInfoContainer from '../../teacher-info/components/TeacherInfoConta
 import TeacherHomepageContainer from '../../teacher-homepage/components/TeacherHomepageContainer'
 import ChangePasswordContainer from '../../change-password/components/ChangePasswordContainer'
 import TeacherFieldsContainer from '../../teacher-fields/components/TeacherFieldsContainer'
+import TeacherTopicsContainer from '../../teacher-topics/components/TeacherTopicsContainer'
 
 const TeacherRouterContainer = function (props) {
     return (
@@ -13,6 +14,7 @@ const TeacherRouterContainer = function (props) {
                 <Route exact path='/info' component={TeacherInfoContainer} />
                 <Route exact path='/changePassword' component={ChangePasswordContainer} />
                 <Route exact path='/teacher/fields' component={TeacherFieldsContainer} />
+                <Route exact path='/teacher/topics' component={TeacherTopicsContainer} />
                 <Redirect from='*' to='/' />
             </Switch>
         </div>
