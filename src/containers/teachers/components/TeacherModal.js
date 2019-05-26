@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import TeacherInput from './TeacherInput'
 
 const TeacherModal = (props) => {
-    const { open } = props
     
     const _onChangeInput = (key) => (value) => {
 

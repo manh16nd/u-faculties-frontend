@@ -1,15 +1,16 @@
-import React, {Component} from 'react'
-import {Switch, Route} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import HomePageContainer from './containers/homepage/components/HomePageContainer'
 
 import HeaderContainer from './components/header/components/HeaderContainer'
 import LoginModalContainer from './components/login-modal/components/LoginModalContainer'
 
-import {getCookie} from './services/cookies'
+import { getCookie } from './services/cookies'
 import AppContext from './AppContext'
-import {verifyUser} from './services/api/AuthServices'
+import { verifyUser } from './services/api/AuthServices'
 import UserRouterContainer from './containers/user-router/components/UserRouterContainer'
+import TeacherRouterContainer from './containers/teacher-router/components/TeacherRouterContainer';
 
 class App extends Component {
     state = {
@@ -25,11 +26,11 @@ class App extends Component {
     }
 
     _fetchUserInfo = async () => {
-        const {user} = this.state
-        const {success, data} = await verifyUser()
+        const { user } = this.state
+        const { success, data } = await verifyUser()
         if (success) {
             this.setState({
-                user: {...user, ...data}
+                user: { ...user, ...data }
             })
         }
     }
@@ -39,8 +40,8 @@ class App extends Component {
     }
 
     render() {
-        const {state, changeState} = this
-        const {user} = this.state
+        const { state, changeState } = this
+        const { user } = this.state
 
         return (
             <AppContext.Provider
@@ -49,13 +50,15 @@ class App extends Component {
                     changeState
                 }}
             >
-                <HeaderContainer/>
-                <LoginModalContainer/>
+                <HeaderContainer />
+                <LoginModalContainer />
 
                 <div className="container-fluid">
                     <Switch>
-                        <Route exact path='/' component={HomePageContainer}/>
-                        {user.token && <UserRouterContainer/>}
+                        <Route exact path='/' component={HomePageContainer} />
+                        {user.token && user.type === 'admin' && <UserRouterContainer />}
+                        {user.token && user.type === 'teacher' && <TeacherRouterContainer />}
+                        <Redirect from='*' to='/' />
                     </Switch>
                 </div>
             </AppContext.Provider>

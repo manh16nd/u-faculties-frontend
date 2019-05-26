@@ -6,8 +6,12 @@
 @import './user-menu/index';
 @import './user-homepage/index';
 @import './teachers/index';
+@import './teacher-info/index';
+@import './input/index';
 
-body, html, #root {
+body,
+html,
+#root {
     min-height: 100vh;
     background: #F9FBFE;
 }
