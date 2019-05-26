@@ -31,8 +31,10 @@ const TeacherHomepage = function (props) {
                     </div>
                     <div className="SectionBody">
                         <div className="SectionLink">
-                            <i className="ti-arrow-right ArrowIcon" />
-                            <span className="Text">Cập nhật lĩnh vực nghiên cứu</span>
+                            <Link to='/teacher/fields'>
+                                <i className="ti-arrow-right ArrowIcon" />
+                                <span className="Text">Cập nhật lĩnh vực nghiên cứu</span>
+                            </Link>
                         </div>
                     </div>
                 </div>
