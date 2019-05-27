@@ -42,6 +42,7 @@ class App extends Component {
     render() {
         const { state, changeState } = this
         const { user } = this.state
+        const type = (user.type === 'admin' || user.type === 'staff') ? 'admin' : (user.type === 'teacher') ? 'teacher' : null
 
         return (
             <AppContext.Provider
@@ -56,8 +57,8 @@ class App extends Component {
                 <div className="container-fluid">
                     <Switch>
                         <Route exact path='/' component={HomePageContainer} />
-                        {user.token && user.type === 'admin' && <UserRouterContainer />}
-                        {user.token && user.type === 'teacher' && <TeacherRouterContainer />}
+                        {user.token && type === 'admin' && <UserRouterContainer />}
+                        {user.token && type === 'teacher' && <TeacherRouterContainer />}
                         <Redirect from='*' to='/' />
                     </Switch>
                 </div>

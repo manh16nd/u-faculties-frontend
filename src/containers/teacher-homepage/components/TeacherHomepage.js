@@ -5,8 +5,8 @@ const TeacherHomepage = function (props) {
 
     return (
         <div className="TeacherHomepage">
-            <div className="UserHomepage">
-                <div className="Section">
+            <div className="Section">
+                <div className="SectionWrapper">
                     <div className="SectionHeader">
                         Thông tin cá nhân
                     </div>
@@ -25,7 +25,9 @@ const TeacherHomepage = function (props) {
                         </div>
                     </div>
                 </div>
-                <div className="Section">
+            </div>
+            <div className="Section">
+                <div className="SectionWrapper">
                     <div className="SectionHeader">
                         Lĩnh vực nghiên cứu
                     </div>
@@ -38,7 +40,9 @@ const TeacherHomepage = function (props) {
                         </div>
                     </div>
                 </div>
-                <div className="Section">
+            </div>
+            <div className="Section">
+                <div className="SectionWrapper">
                     <div className="SectionHeader">
                         Chủ đề nghiên cứu
                     </div>
