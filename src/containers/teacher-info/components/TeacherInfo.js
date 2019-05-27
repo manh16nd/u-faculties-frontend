@@ -72,6 +72,10 @@ const TeacherInfo = function (props) {
                     <div className="col-6">
                         <Input onChange={onChangeInput('name')} label='Tên' id='name' value={user.name || ''} />
                         <Input onChange={onChangeInput('email')} label='Email' id='email' value={user.email || ''} />
+                        <Input onChange={onChangeInput('vnuEmail')} label='VNU Email' id='vnuEmail' value={user.vnuEmail || ''} />
+								<Input onChange={onChangeInput('phone')} label='Số điện thoại' id='phone' value={user.phone || ''} />
+								<Input onChange={onChangeInput('address')} label='Địa chỉ' id='address' value={user.address || ''} />
+                        <Input onChange={onChangeInput('website')} label='Website' id='website' value={user.website || ''} />
                     </div>
                     <div className="col-6">
                         <div className="TeacherAvatar">
@@ -81,6 +85,9 @@ const TeacherInfo = function (props) {
                         <div className="SaveWrapper">
                             <button className="UserButton" onClick={onSubmitSave}>Save</button>
                         </div>
+
+								<Input onChange={onChangeInput('degree')} label='Bằng cấp' id='degree' value={user.degree || ''} />
+								<Input onChange={onChangeInput('position')} label='Vị trí' id='position' value={user.position || ''} />
 
                     </div>
                 </div>
