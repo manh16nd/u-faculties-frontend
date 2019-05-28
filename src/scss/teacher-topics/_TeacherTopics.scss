@@ -1,9 +1,18 @@
 .TeacherTopics {
+    .TeacherTopicsHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
     .FieldsWrapper {
         margin: 1.5rem 0;
 
         .Tabs {
+            box-shadow: 0 13px 35px -12px rgba(35, 35, 35, 0.15);
             display: flex;
+            flex-wrap: wrap;
             width: 100%;
 
             .Tab {
@@ -16,11 +25,44 @@
                 padding: 1rem;
                 cursor: pointer;
                 transition: all .2s linear;
+                border-bottom: 1px solid rgba(115, 115, 115, 0.1);
             }
 
             .Focus {
                 background: #004783;
                 color: #fff;
+            }
+
+            .TabContent {
+                width: 100%;
+                background: #fff;
+                transition: all .2s linear;
+
+                .Topic {
+                    padding-top: 1rem;
+                    border-bottom: 1px solid rgba(115, 115, 115, 0.1);
+                    transition: all .2s linear;
+
+                    &:hover {
+                        background: #e6f7ff;
+                        border-color: transparent;
+                    }
+
+                    .Text {
+                        width: 100%;
+                        margin-bottom: 1rem;
+                        display: flex;
+                        align-items: center;
+
+                        label {
+                            margin: 0;
+                        }
+
+                        .Title {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
             }
         }
     }

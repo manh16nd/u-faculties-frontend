@@ -10,7 +10,7 @@ import { getCookie } from './services/cookies'
 import AppContext from './AppContext'
 import { verifyUser } from './services/api/AuthServices'
 import UserRouterContainer from './containers/user-router/components/UserRouterContainer'
-import TeacherRouterContainer from './containers/teacher-router/components/TeacherRouterContainer';
+import TeacherRouterContainer from './containers/teacher-router/components/TeacherRouterContainer'
 
 class App extends Component {
     state = {

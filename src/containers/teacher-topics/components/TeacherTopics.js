@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { getCookie } from '../../../services/cookies'
-import { getTeacherTopics } from '../../../services/api/TeachersServices';
+import { getTeacherTopics } from '../../../services/api/TeachersServices'
+import { getAllTopics } from '../../../services/api/TopicsServices'
+import AllTopicsTable from './AllTopicsTable'
 
 const TeacherTopics = function (props) {
     const [tab, changeTab] = useState(0)
     const [topics, changeTopics] = useState({
-        page: 1,
-        limit: 0,
-        data: [],
-        total: 0,
+        teacherTopics: [],
+        allTopics: [],
     })
 
     useEffect(() => {
@@ -20,9 +20,17 @@ const TeacherTopics = function (props) {
         const teacherId = getCookie('teacher')
         if (!teacherId) return null
 
-        const { page, limit } = topics
-        const { success, data, message } = await getTeacherTopics({ teacherId, params: { page, limit } })
-        console.log(success, data, message)
+        const getTeacherTopicsRequest = getTeacherTopics({ teacherId })
+        const getAllTopicsRequest = getAllTopics({ limit: 0 })
+
+        const [teacherTopicsResp, topicsResp] = await Promise.all([getTeacherTopicsRequest, getAllTopicsRequest])
+        if (teacherTopicsResp.message || topicsResp.message) return alert(teacherTopicsResp.message || topicsResp.message)
+
+        changeTopics({
+            ...topics,
+            teacherTopics: teacherTopicsResp.data.topics,
+            allTopics: topicsResp.data.topics,
+        })
     }
 
     const _changeTab = (value) => () => {
@@ -33,7 +41,10 @@ const TeacherTopics = function (props) {
         <div className="TeacherTopics container">
             <div className="Card">
                 <div className="CardHeader">
-                    Quản lý chủ đề nghiên cứu
+                    <div className="TeacherTopicsHeader">
+                        Quản lý chủ đề nghiên cứu
+                        <button className="UserButton">Thêm chủ đề mới</button>
+                    </div>
                 </div>
             </div>
 
@@ -44,6 +55,10 @@ const TeacherTopics = function (props) {
                     </div>
                     <div className={classnames("Tab", { 'Focus': !!tab })} onClick={_changeTab(1)}>
                         Tất cả chủ đề
+                    </div>
+
+                    <div className="TabContent">
+                        {tab ? <AllTopicsTable topics={topics.allTopics} /> : null}
                     </div>
                 </div>
             </div>
