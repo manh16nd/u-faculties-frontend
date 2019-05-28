@@ -47,6 +47,15 @@ class Teachers extends Component {
     _onClickNewTeacher = () => {
         this.setState({
             current: {
+                open: true,
+                teacher: {},
+            }
+        })
+    }
+
+    _toggle = () => {
+        this.setState({
+            current: {
                 open: false,
                 teacher: {},
             }
@@ -54,11 +63,11 @@ class Teachers extends Component {
     }
 
     render() {
-        const { teachers } = this.state
+        const { teachers, current } = this.state
 
         return (
             <div className="Teachers">
-                <TeacherModal />
+                <TeacherModal open={current.open} toggle={this._toggle}/>
                 <div className="TopButtons">
                     <button className="UserButton" onClick={this._onClickNewTeacher}>Thêm giảng viên</button>
                 </div>
