@@ -15,8 +15,6 @@ class UserRouterContainer extends Component {
                 <Route exact path="/user" component={UserHomepageContainer} />
                 <Route exact path="/user/teachers" component={TeachersContainer} />
                 <Route exact path="/user/departments" component={AdminDepartmentsContainer} />
-                <Route exact path="/user" component={UserHomepageContainer}/>
-                <Route exact path="/user/teachers" component={TeachersContainer}/>
                 <Route exact path='/changePassword' component={ChangePasswordContainer} />
                 <Route exact path='/inputExcel' component={InputExcelContainer} />
             </div>

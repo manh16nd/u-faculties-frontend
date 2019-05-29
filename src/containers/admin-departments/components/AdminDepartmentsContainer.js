@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminDepartments from './AdminDepartments';
+import AdminDepartments from './AdminDepartments'
 
 const AdminDepartmentsContainer = function (props) {
 

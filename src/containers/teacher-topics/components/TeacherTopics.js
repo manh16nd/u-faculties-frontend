@@ -4,6 +4,7 @@ import { getCookie } from '../../../services/cookies'
 import { getTeacherTopics } from '../../../services/api/TeachersServices'
 import { getAllTopics } from '../../../services/api/TopicsServices'
 import AllTopicsTable from './AllTopicsTable'
+import TeacherTopicsTable from './TeacherTopicsTable'
 
 const TeacherTopics = function (props) {
     const [tab, changeTab] = useState(0)
@@ -57,10 +58,12 @@ const TeacherTopics = function (props) {
                         Tất cả chủ đề
                     </div>
 
-                    <div className="TabContent">
-                        {tab ? <AllTopicsTable topics={topics.allTopics} /> : null}
-                    </div>
+                    {!!tab && <div className="TabContent">
+                        <AllTopicsTable topics={topics.allTopics} />
+                    </div>}
                 </div>
+
+                {!tab && <TeacherTopicsTable topics={topics.teacherTopics} />}
             </div>
         </div>
     )

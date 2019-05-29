@@ -1,16 +1,11 @@
-import React, { useState } from 'react'
-
-import { getCookie, setCookie } from '../../../services/cookies'
-import { changePassword } from '../../../services/api/AuthServices'
+import React from 'react'
 
 const InputExcel = function (props) {
-    const [state, changeState] = useState({
+    // const [state, changeState] = useState({})
 
-    })
-
-    const uploadFileExcel = async () => {
-
-    }
+    // const uploadFileExcel = async () => {
+    //     return null
+    // }
 
 
     return (
@@ -22,10 +17,10 @@ const InputExcel = function (props) {
                 <div className="CardBody">
                     <form>
                         <div className="SubmitWrapper">
-                            {/* <button type="submit" className="UserButton">
+                            <button type="submit" className="UserButton">
                                 Tải file Excel lên
                                 <input type="file" className="UserButton" />
-                            </button> */}
+                            </button>
                             <input type="file" className="UserButton" />
                         </div>
                     </form>
