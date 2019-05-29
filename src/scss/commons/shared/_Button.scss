@@ -1,0 +1,44 @@
+.Button {
+    color: #fff;
+    background: #004783;
+    border: 1px solid #004783;
+    outline: none;
+    border-radius: 25px;
+    padding: 0 35px;
+    line-height: 48px;
+    transition: all .2s linear;
+    font-size: 1rem !important;
+
+    &:hover {
+        background: #fff;
+        box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
+        color: #004783;
+    }
+}
+
+
+.UserButton {
+    padding: .5rem 1rem;
+    border: 1px solid #004783;
+    border-radius: .25rem;
+    transition: all .2s linear;
+    background: #004783;
+    color: #fff;
+    font-size: 1rem !important;
+
+    &:hover {
+        background: #fff;
+        box-shadow: 0 13px 28px 0 rgba(0, 71, 131, .25);
+        color: #004783;
+    }
+}
+
+
+.DangerButton {
+    background-color: #c62828;
+    border-color: #c62828;
+
+    &:hover {
+        color: #c62828;
+    }
+}

@@ -65,7 +65,7 @@ const AdminDepartmentsTable = function (props) {
                                 <button className="UserButton mr-2" type="button" onClick={onClickChange(department)}>
                                     <i className="ti-pencil" />
                                 </button>
-                                <button className="UserButton" onClick={_onClickRemove(department)}>
+                                <button className="UserButton DangerButton" onClick={_onClickRemove(department)}>
                                     <i className="ti-trash" />
                                 </button>
                             </div>}

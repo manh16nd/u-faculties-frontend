@@ -26,7 +26,7 @@ export const editDepartment = (department) => {
 }
 
 export const addDepartment = (department) => {
-    return createApiService({
+    return createAuthApiService({
         url: '/departments',
         method: 'post',
         data: department
@@ -34,7 +34,7 @@ export const addDepartment = (department) => {
 }
 
 export const removeDepartment = (departmentId) => {
-    return createApiService({
+    return createAuthApiService({
         url: `/departments/${departmentId}`,
         method: 'delete',
     })

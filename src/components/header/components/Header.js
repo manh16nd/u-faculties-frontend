@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
+
+import { removeCookie } from '../../../services/cookies/index'
 import UserMenuContainer from '../../user-menu/components/UserMenuContainer'
 
 class Header extends Component {
@@ -10,21 +13,24 @@ class Header extends Component {
             loginModal: true,
         })
 
-        return this.props.changeState({
-            userMenu: true,
-        })
+        removeCookie('token')
+        removeCookie('type')
+        removeCookie('username')
+        removeCookie('teacher')
+        window.location.reload()
     }
 
     render() {
         const { user } = this.props.app
 
         return (
-            <div className="Header">
+            <div className={classnames("Header", { 'AdminHeader': user.type && user.type !== 'teacher' })}>
                 <div className="LeftHeader">
                     <Link to={'/'}>
                         <img className="Logo" src="images/uet.jpg" alt="UET-LOGO" />
                     </Link>
-                    <span className="Title">Trường Đại học Công nghệ uFaculties</span>
+                    <span className="Title">Trường Đại học Công nghệ - uFaculties</span>
+                    {user.type && user.type !== 'teacher' && <span className="Title">- Quản lý</span>}
                 </div>
                 <div className="RightHeader">
                     <div className="ButtonWrapper">
@@ -32,8 +38,14 @@ class Header extends Component {
                             <button className="Button mr-2">Quản lý
                             </button>
                         </Link>}
-                        <button className="Button"
-                            onClick={this._onClickLogin}>{user && user.token ? user.username || 'Đăng nhập' : 'Đăng nhập'}</button>
+                        <button className={classnames("Button", {
+                            'UserHeaderButton': user && user.token
+                        })}
+                            onClick={this._onClickLogin}>
+                            <span>
+                                {user && user.token ? user.username || 'Đăng nhập' : 'Đăng nhập'}
+                            </span>
+                        </button>
                     </div>
                     <UserMenuContainer />
                 </div>

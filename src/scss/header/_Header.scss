@@ -41,3 +41,33 @@
         }
     }
 }
+
+// .AdminHeader {
+//     background: #004783;
+
+//     .LeftHeader {
+//         .Title {
+//             color: #fff;
+//         }
+//     }
+
+//     .RightHeader {
+//         .ButtonWrapper {
+//             button {
+//                 border: 1px solid #fff;
+//             }
+//         }
+//     }
+// }
+
+.UserHeaderButton {
+    &:hover {
+        span {
+            display: none;
+        }
+
+        &:after {
+            content: 'Đăng xuất';
+        }
+    }
+}

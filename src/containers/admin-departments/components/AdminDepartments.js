@@ -49,9 +49,16 @@ const AdminDepartments = function (props) {
     const onChangeDepartment = async (department) => {
         if (!department._id) return null
 
-        const request = (department._id === true) ? addDepartment(department) : editDepartment(department)
+        const request = (department._id === 1) ? addDepartment(department) : editDepartment(department)
 
         const { success, message } = await request
+        const [first, ...entity] = departments.entity
+        console.log(first)
+
+        setDepartments({
+            ...departments,
+            entity
+        })
         if (success) return fetchData()
         alert(message)
     }
