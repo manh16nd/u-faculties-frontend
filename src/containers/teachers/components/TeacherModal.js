@@ -3,13 +3,21 @@ import PropTypes from 'prop-types'
 import TeacherInput from './TeacherInput'
 
 const TeacherModal = (props) => {
-    
+
     const _onChangeInput = (key) => (value) => {
 
     }
 
+    const { open } = props
+
+    if (!open) return null
+
+    const _onClickToggle = () => {
+        props.toggle()
+    }
+
     return (
-        <div className="TeacherModal">
+        <div className="TeacherModal" onClick={_onClickToggle}>
             <div className="ModalWrapper">
                 <div className="ModalHeader">
                     <div className="ModelTitle">
@@ -31,6 +39,7 @@ const TeacherModal = (props) => {
 
 TeacherModal.propTypes = {
     open: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
 }
 
 export default TeacherModal

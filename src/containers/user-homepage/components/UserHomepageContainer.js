@@ -6,6 +6,7 @@ class UserHomepageContainer extends Component {
 
         return (
             <div className="UserComponentContainer">
+                    
                 <UserHomepage/>
             </div>
         )
