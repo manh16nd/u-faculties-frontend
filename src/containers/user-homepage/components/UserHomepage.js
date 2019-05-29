@@ -32,8 +32,10 @@ class UserHomepage extends Component {
                     </div>
                         <div className="SectionBody">
                             <div className="SectionLink">
-                                <i className="ti-arrow-right ArrowIcon" />
-                                <span className="Text">Quản lý bộ môn</span>
+                                <Link to='/user/departments'>
+                                    <i className="ti-arrow-right ArrowIcon" />
+                                    <span className="Text">Quản lý bộ môn</span>
+                                </Link>
                             </div>
                         </div>
                     </div>
