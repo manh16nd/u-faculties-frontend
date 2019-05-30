@@ -5,6 +5,7 @@ import TeachersContainer from '../../teachers/components/TeachersContainer'
 import AdminDepartmentsContainer from '../../admin-departments/components/AdminDepartmentsContainer'
 import ChangePasswordContainer from '../../change-password/components/ChangePasswordContainer'
 import InputExcelContainer from '../../input-excel/components/InputExcelContainer'
+import UserFieldsContainer from '../../user-fields/components/UserFieldsContainer'
 
 
 class UserRouterContainer extends Component {
@@ -15,6 +16,7 @@ class UserRouterContainer extends Component {
                 <Route exact path="/user" component={UserHomepageContainer} />
                 <Route exact path="/user/teachers" component={TeachersContainer} />
                 <Route exact path="/user/departments" component={AdminDepartmentsContainer} />
+                <Route exact path="/user/fields" component={UserFieldsContainer} />
                 <Route exact path='/changePassword' component={ChangePasswordContainer} />
                 <Route exact path='/inputExcel' component={InputExcelContainer} />
             </div>

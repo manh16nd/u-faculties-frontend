@@ -26,11 +26,8 @@ const TeacherTopicsTable = function (props) {
                 <table className="Table">
                     <thead>
                         <tr>
-                            <th>Tên Khoa</th>
-                            <th>Loại</th>
-                            <th>Điện thoại</th>
-                            <th>Địa chỉ</th>
-                            <th>Website</th>
+                            <th>Tên</th>
+                            <th>Mô tả</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -41,16 +38,7 @@ const TeacherTopicsTable = function (props) {
                                 {edit._id ? <Input value={edit.name} onChange={onChangeEdit('name')} /> : topic.name}
                             </td>
                             <td>
-                                {edit._id ? topic.type : topic.type}
-                            </td>
-                            <td>
-                                {edit._id ? <Input value={topic.phone} onChange={onChangeEdit('phone')} /> : topic.phone}
-                            </td>
-                            <td>
-                                {edit._id ? <Input value={topic.address} onChange={onChangeEdit('address')} /> : topic.address}
-                            </td>
-                            <td>
-                                {edit._id ? <Input value={topic.website} onChange={onChangeEdit('website')} /> : topic.website}
+                                {edit._id ? topic.description : topic.description}
                             </td>
                             <td>
                                 <div className="ActionsWrapper">
