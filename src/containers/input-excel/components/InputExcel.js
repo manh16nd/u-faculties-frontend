@@ -17,10 +17,10 @@ const InputExcel = function (props) {
                 <div className="CardBody">
                     <form>
                         <div className="SubmitWrapper">
-                            <button type="submit" className="UserButton">
+                            {/* <button type="submit" className="UserButton">
                                 Tải file Excel lên
                                 <input type="file" className="UserButton" />
-                            </button>
+                            </button> */}
                             <input type="file" className="UserButton" />
                         </div>
                     </form>
