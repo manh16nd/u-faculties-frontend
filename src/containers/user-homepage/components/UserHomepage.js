@@ -19,7 +19,7 @@ class UserHomepage extends Component {
                                 </Link>
                             </div>
                             <div className="SectionLink">
-                                <Link to={'/inputExcel'}>
+                                <Link to={'/user/inputExcel'}>
                                     <i className="ti-arrow-right ArrowIcon" />
                                     <span className="Text">Nhập tài khoản giảng viên từ Excel</span>
                                 </Link>
@@ -49,7 +49,7 @@ class UserHomepage extends Component {
                     </div>
                         <div className="SectionBody">
                             <div className="SectionLink">
-                                <Link to='/user/fields'>
+                                <Link to={'/user/fields'}>
                                     <i className="ti-arrow-right ArrowIcon" />
                                     <span className="Text">Quản lý lĩnh vực nghiên cứu</span>
                                 </Link>
@@ -64,7 +64,7 @@ class UserHomepage extends Component {
                     </div>
                         <div className="SectionBody">
                             <div className="SectionLink">
-                                <Link to={'/changePassword'}>
+                                <Link to={'/user/changePassword'}>
                                     <i className="ti-arrow-right ArrowIcon" />
                                     <span className="Text">Đổi mật khẩu</span>
                                 </Link>

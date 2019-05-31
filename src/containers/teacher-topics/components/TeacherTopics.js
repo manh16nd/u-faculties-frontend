@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { getCookie } from '../../../services/cookies'
 import { getTeacherTopics } from '../../../services/api/TeachersServices'
-import { getAllTopics } from '../../../services/api/TopicsServices'
+import { getAllTopics, removeTopic } from '../../../services/api/TopicsServices'
 import AllTopicsTable from './AllTopicsTable'
 import TeacherTopicsTable from './TeacherTopicsTable'
 
@@ -38,6 +38,15 @@ const TeacherTopics = function (props) {
         changeTab(value)
     }
 
+    const _onRemoveTopic = async (TopicId) => {
+        if (!TopicId) return null
+
+        const { success, message } = await removeTopic(TopicId)
+        if (success) 
+        return _fetchTopics()
+        alert(message)
+    }
+
     return (
         <div className="TeacherTopics container">
             <div className="Card">
@@ -63,7 +72,7 @@ const TeacherTopics = function (props) {
                     </div>}
                 </div>
 
-                {!tab && <TeacherTopicsTable topics={topics.teacherTopics} />}
+                {!tab && <TeacherTopicsTable topics={topics.teacherTopics} onRemove={_onRemoveTopic}/>}
             </div>
         </div>
     )
