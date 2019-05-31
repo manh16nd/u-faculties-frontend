@@ -127,6 +127,15 @@ const UserFields = function (props) {
         })
     }
 
+    const _onKeyDownInput = (e) => {
+        if (e.keyCode !== 27) return
+        e.preventDefault()
+        setFields({
+            ..._fields,
+            current: null,
+        })
+    }
+
     const _onSubmit = async (e) => {
         e.preventDefault()
 
@@ -154,7 +163,7 @@ const UserFields = function (props) {
             <div className="FieldChildren">
                 <div className="FieldTitle">
                     {isEditting ? <form onSubmit={_onSubmit}>
-                        <Input id={current._id} value={current.name} onChange={_onChangeInput} />
+                        <Input id={current._id} value={current.name} onChange={_onChangeInput} onKeyDown={_onKeyDownInput} />
                     </form> : <span onClick={_expand(field._id)}>{field.name}</span>}
                     <div className="Buttons">
                         <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
@@ -184,7 +193,7 @@ const UserFields = function (props) {
                 <div className="CardHeader">
                     <div className="FieldHeader">
                         {isEditting ? <form onSubmit={_onSubmit}>
-                            <Input id={current._id} value={current.name} onChange={_onChangeInput} />
+                            <Input id={current._id} value={current.name} onChange={_onChangeInput} onKeyDown={_onKeyDownInput} />
                         </form> : <span>{field.name}</span>}
 
                         <div className="FieldButtons">
