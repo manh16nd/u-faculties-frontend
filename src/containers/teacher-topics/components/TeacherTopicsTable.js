@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Input from '../../../components/input/components/Input'
+import Modal from '../../../components/modal/components/Modal'
 
 const TeacherTopicsTable = function (props) {
     const [edit, changeEdit] = useState({})
 
-    const { topics, onRemove } = props
+    const { topics, onRemove, onUnsubcribe } = props
 
     const onClickChange = (topic) => () => {
         const editTopic = { ...topic }
@@ -18,15 +19,34 @@ const TeacherTopicsTable = function (props) {
         if (window.confirm('Bạn có chắc chắn muốn xóa đơn vị: ' + topic.name)) onRemove(topic._id)
     }
 
-    const onChangeEdit = (key) => (value) => {
-        changeEdit({
-            ...edit,
-            [key]: value,
-        })
+    const _onClickRemoveTeacherTopic = (topic) => () => {
+        if (!topic || !topic._id) return null
+        if (window.confirm('Bạn có chắc chắn muốn ngừng tham gia: ' + topic.name)) onUnsubcribe(topic._id)
     }
+
+    const _changeInput = (key) => (value) => changeEdit({
+        ...edit,
+        [key]: value,
+    })
+
+    const _onSubmit = (e) => {
+        e.preventDefault()
+        if (props.onEdit(edit)) changeEdit({})
+    }
+
+    const _toggle = () => changeEdit({})
 
     return (
         <div className="TeacherTopicsTable">
+            {!!edit._id && <Modal title="Sửa chủ đề" onToggle={_toggle}>
+                <form onSubmit={_onSubmit}>
+                    <Input value={edit.name} label="Tên chủ đề" onChange={_changeInput('name')} required />
+                    <Input value={edit.description} label="Tên chủ đề" onChange={_changeInput('description')} />
+                    <button className="UserButton" type="submit">
+                        Sửa chủ đề
+                    </button>
+                </form>
+            </Modal>}
             <div className="TableWrapper">
                 <table className="Table">
                     <thead>
@@ -40,28 +60,23 @@ const TeacherTopicsTable = function (props) {
                     <tbody>
                         {topics.map((topic) => <tr key={topic._id} className="">
                             <td>
-                                {edit._id ? <Input value={edit.name} onChange={onChangeEdit('name')} /> : topic.name}
+                                {topic.name}
                             </td>
                             <td>
-                                {edit._id ? topic.description : topic.description}
+                                {topic.description}
                             </td>
                             <td>
-                                <div className="ActionsWrapper">
-                                    {edit._id ? <div>
-                                        <button className="UserButton">
-                                            <i className="ti-save" />
-                                        </button>
-                                        <button className="UserButton" onClick={onClickChange({})}>
-                                            <i className="ti-close" />
-                                        </button>
-                                    </div> : <div>
-                                            <button className="UserButton" onClick={onClickChange(topic)}>
-                                                <i className="ti-pencil" />
-                                            </button>
-                                            <button className="UserButton" onClick={_onClickTrash(topic)}>
-                                                <i className="ti-trash" />
-                                            </button>
-                                        </div>}
+                                <div className="ActionsWrapper"> <div>
+                                    <button className="UserButton" onClick={onClickChange(topic)}>
+                                        <i className="ti-pencil" />
+                                    </button>
+                                    <button className="UserButton" onClick={_onClickTrash(topic)}>
+                                        <i className="ti-trash" />
+                                    </button>
+                                    <button className="UserButton" onClick={_onClickRemoveTeacherTopic(topic)}>
+                                        Không tham gia
+                                    </button>
+                                </div>
                                 </div>
                             </td>
                         </tr>)}
@@ -75,6 +90,8 @@ const TeacherTopicsTable = function (props) {
 TeacherTopicsTable.propTypes = {
     topics: PropTypes.array.isRequired,
     onRemove: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onUnsubcribe: PropTypes.func.isRequired,
 }
 
 export default TeacherTopicsTable

@@ -73,11 +73,21 @@
                             }
                         }
 
+
+                        .FieldButtons {
+                            margin: 0 .5rem;
+
+                            .ExpandButton {
+                                margin: 0 .5rem;
+                            }
+                        }
+
                         &:hover {
                             .Buttons {
                                 opacity: 1;
                             }
                         }
+
                     }
 
                     .FieldBody {

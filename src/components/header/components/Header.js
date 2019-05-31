@@ -17,7 +17,6 @@ class Header extends Component {
         removeCookie('type')
         removeCookie('username')
         removeCookie('teacher')
-        window.location.reload()
     }
 
     render() {

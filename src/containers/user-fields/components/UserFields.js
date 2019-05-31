@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Input from '../../../components/input/components/Input'
 import { getFields, editField, createNewField, removeField } from '../../../services/api/FieldsServices'
-import Modal from '../../../components/modal/components/Modal';
+import Modal from '../../../components/modal/components/Modal'
 
 const UserFields = function (props) {
     const [_fields, setFields] = useState({

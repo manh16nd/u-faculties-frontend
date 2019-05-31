@@ -11,9 +11,11 @@
         font-weight: 200;
         font-size: 1.75rem;
         border-bottom: 1px solid rgba(115, 115, 115, 0.1);
+        overflow: auto;
     }
 
     .CardBody {
         padding: 1rem;
+        overflow: auto;
     }
 }

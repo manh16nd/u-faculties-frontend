@@ -36,7 +36,7 @@ export const createNewField = (field) => {
 export const removeField = (field) => {
     const { _id } = field
 
-    return createApiService({
+    return createAuthApiService({
         method: 'delete',
         url: `/fields/${_id}`,
     })

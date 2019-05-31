@@ -14,3 +14,21 @@ export const removeTopic = (topicId) => {
         method: 'delete',
     })
 }
+
+export const createNewTopics = (topic) => {
+    return createAuthApiService({
+        url: `/topics`,
+        method: 'post',
+        data: topic
+    })
+}
+
+export const editTopics = (topic) => {
+    const { _id } = topic
+
+    return createAuthApiService({
+        url: `/topics/${_id}`,
+        method: 'patch',
+        data: topic
+    })
+}

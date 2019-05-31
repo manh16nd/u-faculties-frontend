@@ -1,4 +1,5 @@
 import { createApiService, createAuthApiService } from './index'
+import { getCookie } from '../cookies'
 
 export const getTeachers = (args) => {
     return createApiService({
@@ -31,5 +32,54 @@ export const getTeacherTopics = ({ teacherId, params }) => {
         url: `/teachers/${teacherId}/topics`,
         method: 'get',
         params,
+    })
+}
+
+export const addTeacherToTopics = (topics) => {
+    const teacherId = getCookie('teacher')
+
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/topics`,
+        method: 'post',
+        data: { topics }
+    })
+}
+
+export const removeTeacherFromTopics = (topics) => {
+    const teacherId = getCookie('teacher')
+
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/topics`,
+        method: 'delete',
+        data: { topics }
+    })
+}
+
+export const getTeacherFields = () => {
+    const teacherId = getCookie('teacher')
+
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/fields`,
+        method: 'get',
+    })
+}
+
+export const addTeacherToFields = (fields) => {
+    const teacherId = getCookie('teacher')
+
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/fields`,
+        method: 'post',
+        data: { fields }
+    })
+}
+
+export const removeTeacherFromFields = (fields) => {
+    const teacherId = getCookie('teacher')
+
+    return createAuthApiService({
+        url: `/teachers/${teacherId}/fields`,
+        method: 'delete',
+        data: { fields }
     })
 }
