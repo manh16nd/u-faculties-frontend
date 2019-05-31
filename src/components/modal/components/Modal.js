@@ -9,7 +9,8 @@ const Modal = function (props) {
     }
 
     return (
-        <div className="Modal" onClick={_onClickToggle}>
+        <div className="Modal">
+            <div className="ModalBackground" onClick={_onClickToggle} />
             <div className="ModalWrapper">
                 <div className="Card">
                     <div className="CardHeader">
