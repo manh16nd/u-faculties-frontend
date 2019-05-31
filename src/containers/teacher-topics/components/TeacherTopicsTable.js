@@ -6,11 +6,16 @@ import Input from '../../../components/input/components/Input'
 const TeacherTopicsTable = function (props) {
     const [edit, changeEdit] = useState({})
 
-    const { topics } = props
+    const { topics, onRemove } = props
 
     const onClickChange = (topic) => () => {
         const editTopic = { ...topic }
         changeEdit(editTopic)
+    }
+
+    const _onClickTrash = (topic) => () => {
+        if (!topic || !topic._id) return null
+        if (window.confirm('Bạn có chắc chắn muốn xóa đơn vị: ' + topic.name)) onRemove(topic._id)
     }
 
     const onChangeEdit = (key) => (value) => {
@@ -65,7 +70,7 @@ const TeacherTopicsTable = function (props) {
                                             <button className="UserButton" onClick={onClickChange(topic)}>
                                                 <i className="ti-pencil" />
                                             </button>
-                                            <button className="UserButton">
+                                            <button className="UserButton" onClick={_onClickTrash(topic)}>
                                                 <i className="ti-trash" />
                                             </button>
                                         </div>}
@@ -81,6 +86,7 @@ const TeacherTopicsTable = function (props) {
 
 TeacherTopicsTable.propTypes = {
     topics: PropTypes.array.isRequired,
+    onRemove: PropTypes.func.isRequired,
 }
 
 export default TeacherTopicsTable
