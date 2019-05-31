@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Input from '../../../components/input/components/Input'
-import { getFields, editField, createNewField } from '../../../services/api/FieldsServices'
+import { getFields, editField, createNewField, removeField } from '../../../services/api/FieldsServices'
 import Modal from '../../../components/modal/components/Modal';
 
 const UserFields = function (props) {
@@ -86,6 +86,13 @@ const UserFields = function (props) {
         })
     }
 
+    const _closeNewField = () => {
+        setFields({
+            ..._fields,
+            newField: null,
+        })
+    }
+
     const _submitNewField = async (e) => {
         e.preventDefault()
         setFields({
@@ -130,6 +137,14 @@ const UserFields = function (props) {
         alert(message)
     }
 
+    const _onClickRemove = (field) => async () => {
+        if (!window.confirm('Bạn muốn xóa lĩnh vực: ' + field.name + ' ?')) return
+
+        const { success, message } = await removeField(field)
+        if (success) return _fetchFields()
+        alert(message)
+    }
+
     const _renderChildren = (field) => {
         const { flatEntity, current } = _fields
         const isThereSubField = field.children && field.children.length
@@ -144,7 +159,7 @@ const UserFields = function (props) {
                     <div className="Buttons">
                         <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
                         <button className="UserButton" onClick={_onClickAddChild(field)}>Add sub</button>
-                        <button className="UserButton">Remove</button>
+                        <button className="UserButton" onClick={_onClickRemove(field)}>Remove</button>
                     </div>
                 </div>
                 {!!flatEntity[field._id] &&
@@ -176,7 +191,7 @@ const UserFields = function (props) {
                             <div className="Buttons">
                                 <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
                                 <button className="UserButton" onClick={_onClickAddChild(field)}>Add sub</button>
-                                <button className="UserButton">Remove</button>
+                                <button className="UserButton" onClick={_onClickRemove(field)}>Remove</button>
                             </div>
                             <span onClick={_expand(field._id)} className="ExpandButton"><i className="ti-angle-down" /></span>
                         </div>
@@ -207,7 +222,7 @@ const UserFields = function (props) {
             <div className="FieldsWrapper container">
                 {_fields.entity.map((field) => _renderField(field))}
             </div>
-            {!!_fields.newField && <Modal title="Thêm mới lĩnh vực">
+            {!!_fields.newField && <Modal title="Thêm mới lĩnh vực" onToggle={_closeNewField}>
                 <form onSubmit={_submitNewField}>
                     <div className="NewFieldWrapper">
                         <Input label="Tên lĩnh vực" value={_fields.newField.name} onChange={_onChangeNewField} />
