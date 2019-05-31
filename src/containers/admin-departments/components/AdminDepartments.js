@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import AdminDepartmentsTable from './AdminDepartmentsTable'
 import { getDepartments, getDepartmentTypes, editDepartment, addDepartment, removeDepartment } from '../../../services/api/DepartmentsServices'
 
@@ -79,7 +81,10 @@ const AdminDepartments = function (props) {
             <div className="Card">
                 <div className="CardHeader">
                     <div className="AdminDepartmentsHeader">
-                        Quản lý đơn vị
+                        <div className="Title">
+                            <Link class="BackButton" to="/user"><i class="ti-arrow-left"></i></Link>
+                            Quản lý đơn vị
+                        </div>
                         <button className="UserButton" onClick={_addNewDepartment}>Thêm đơn vị mới</button>
                     </div>
                 </div>

@@ -1,0 +1,21 @@
+.UserFields {
+    .FieldsWrapper {
+        .FieldWrapper {
+            margin: .5rem 0;
+
+            .FieldHeader {
+                font-size: 1.15rem !important;
+                font-weight: 300;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .ExpandButton {
+                    cursor: pointer;
+                }
+            }
+
+            .FieldBody {}
+        }
+    }
+}

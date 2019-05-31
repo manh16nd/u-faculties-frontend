@@ -7,6 +7,19 @@ a {
     color: #004783;
 }
 
+.BackButton {
+    margin-right: 1rem;
+    text-decoration: none !important;
+
+    &:hover {
+        font-weight: 500;
+
+        i {
+            text-shadow: 0 13px 28px 0 rgba(0, 71, 131, 0.25);
+        }
+    }
+}
+
 .PageTitle {
     font-weight: 300;
 
