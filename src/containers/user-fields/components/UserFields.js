@@ -224,7 +224,10 @@ const UserFields = function (props) {
         <div className="UserFields">
             <div className="Card">
                 <div className="CardHeader">
-                    Quản lý lĩnh vực nghiên cứu
+                    <div className="UserFieldsHeader">
+                        <span>Quản lý lĩnh vực nghiên cứu</span>
+                        <button onClick={_onClickAddChild({ _id: null })} className="UserButton">Thêm lĩnh vực mới</button>
+                    </div>
                 </div>
             </div>
 
