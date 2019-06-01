@@ -1,0 +1,25 @@
+.HomepageTeacher {
+    .InfoWrapper {
+        .Info {
+            margin: .5rem 0;
+            padding: .5rem;
+            border-radius: .25rem;
+            transition: all .2s linear;
+
+            &:hover {
+                background: #ECF1F5;
+            }
+        }
+
+        .Image {
+            margin: .5rem 0;
+            padding: .5rem;
+
+            img {
+                max-width: 50%;
+                height: auto;
+                border-radius: .25rem;
+            }
+        }
+    }
+}

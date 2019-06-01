@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createRef } from 'react'
 import PropTypes from 'prop-types'
 import Input from '../../../components/input/components/Input'
-import Select from '../../../components/select/components/Select';
+import Select from '../../../components/select/components/Select'
+import { uploadTeacherAvatar } from '../../../services/api/TeachersServices'
 
 const TeacherModal = (props) => {
     const { teacher, departments, onSave, onToggle } = props
     const [_teacher, _setTeacher] = useState({})
+    const [avatarFile, changeAvatar] = useState(null)
+    const [avatarLoading, changeAvatarLoading] = useState(false)
+
+    let avatarInput = createRef()
+
+    useEffect(() => {
+        if (avatarFile) uploadAvatar()
+    }, [avatarFile])
 
     useEffect(() => {
         _mapPropToState()
@@ -20,6 +29,22 @@ const TeacherModal = (props) => {
     const _onSubmit = (e) => {
         e.preventDefault()
         if (onSave(_teacher)) onToggle()
+    }
+
+    const onChangeFile = (e) => {
+        const { files } = e.target
+        changeAvatar(files[0])
+    }
+
+    const uploadAvatar = async () => {
+        const formData = new FormData()
+        formData.append('avatar', avatarFile)
+        changeAvatarLoading(true)
+        const { success, message } = await uploadTeacherAvatar({ teacherId: teacher._id, avatar: formData })
+
+        if (success) alert(true)
+        changeAvatarLoading(false)
+        if (message) alert(message)
     }
 
     const _onChangeInput = (key) => (value) => {
@@ -63,10 +88,13 @@ const TeacherModal = (props) => {
                 </div>
                 <div className="col-6">
                     <Select id='teacher-department' value={_teacher.department || ''} onChange={_onChangeInput('department')} label='Đơn vị' options={_departments} />
+                    <button className="UserButton mt-3" type="submit">Lưu</button>
                 </div>
-                <div className="col-12">
-                    <button className="UserButton" type="submit">Lưu</button>
-                </div>
+                {!!teacher._id &&
+                    <div className="col-6">
+                        <img src={avatarFile || teacher.avatar} alt="teacher-avatar" />
+                        <input type="file" ref={input => avatarInput = input} className="HiddenInput" onChange={onChangeFile} />
+                    </div>}
             </form>
         </div>
     )

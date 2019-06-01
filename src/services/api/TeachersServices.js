@@ -1,6 +1,13 @@
 import { createApiService, createAuthApiService } from './index'
 import { getCookie } from '../cookies'
 
+export const getTeacherInfo = (id) => {
+    return createApiService({
+        url: `/teachers/${id}`,
+        method: 'get',
+    })
+}
+
 export const getTeachers = (args) => {
     return createApiService({
         url: '/teachers',
@@ -9,6 +16,12 @@ export const getTeachers = (args) => {
     })
 }
 
+export const removeTeacher = ({ teacherId }) => {
+    return createAuthApiService({
+        url: `/teachers/${teacherId}`,
+        method: 'delete',
+    })
+}
 
 export const uploadTeacherAvatar = ({ teacherId, avatar }) => {
     return createAuthApiService({

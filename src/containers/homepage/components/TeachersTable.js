@@ -23,7 +23,7 @@ class TeachersTable extends Component {
                     </thead>
                     <tbody>
                     {teachers.entity.map((teacher) => <tr key={teacher._id}>
-                        <td><Link to={`/teachers/${teacher._id}`}>{teacher.name}</Link></td>
+                        <td><Link to={`/teacher-info/${teacher._id}`}>{teacher.name}</Link></td>
                         <td>{teacher.email}</td>
                         <td>{teacher.vnuEmail}</td>
                         <td>{teacher.phone}</td>

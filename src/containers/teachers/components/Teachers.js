@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/modal/components/Modal'
 import TeacherModal from './TeacherModal'
-import { getTeachers, createNewTeacher, editTeacherInfo } from '../../../services/api/TeachersServices'
+import { getTeachers, createNewTeacher, editTeacherInfo, removeTeacher } from '../../../services/api/TeachersServices'
 import { getDepartments } from '../../../services/api/DepartmentsServices'
 
 class Teachers extends Component {
@@ -36,7 +36,7 @@ class Teachers extends Component {
     _fetchTeachers = async () => {
         const { teachers } = this.state
         const { limit, page } = teachers
-        const { data, message } = await getTeachers({ limit, page })
+        const { data, message } = await getTeachers({ limit: 0, page })
         if (message) return alert(message)
         this.setState({
             teachers: {
@@ -76,6 +76,9 @@ class Teachers extends Component {
 
     _onClickDelete = (teacher) => async () => {
         if (!window.confirm('Bạn muốn xóa tài khoản của: ' + teacher.name + ' ?')) return
+        const { success, message } = await removeTeacher({ teacherId: teacher._id })
+        if (!success) return alert(message)
+        this._fetchTeachers()
     }
 
     _toggle = () => {
@@ -156,8 +159,8 @@ class Teachers extends Component {
                                         <td>{teacher.degree}</td>
                                         <td>{teacher.position}</td>
                                         <td>
-                                            <button className="UserButton" onClick={this._onClickEdit(teacher)}>Sửa tài khoản</button>
-                                            <button className="UserButton" onClick={this._onClickDelete(teacher)}>Xóa tài khoản</button>
+                                            <button className="UserButton mr-2" onClick={this._onClickEdit(teacher)}>Sửa tài khoản</button>
+                                            <button className="UserButton DangerButton" onClick={this._onClickDelete(teacher)}>Xóa tài khoản</button>
                                         </td>
                                     </tr>
                                 )
