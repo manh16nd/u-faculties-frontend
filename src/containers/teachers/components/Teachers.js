@@ -3,6 +3,7 @@ import Modal from '../../../components/modal/components/Modal'
 import TeacherModal from './TeacherModal'
 import { getTeachers, createNewTeacher, editTeacherInfo, removeTeacher } from '../../../services/api/TeachersServices'
 import { getDepartments } from '../../../services/api/DepartmentsServices'
+import Input from '../../../components/input/components/Input'
 
 class Teachers extends Component {
     state = {
@@ -11,6 +12,7 @@ class Teachers extends Component {
             total: 0,
             limit: 0,
             page: 1,
+            name: '',
             loading: false,
         },
         departments: [],
@@ -33,10 +35,22 @@ class Teachers extends Component {
         this._fetchDepartments()
     }
 
+    _onChangeSearch = (key) => (value) => this.setState(({ teachers }) => ({
+        teachers: {
+            ...teachers,
+            [key]: value,
+        }
+    }))
+
+    _submitSearch = (e) => {
+        e.preventDefault()
+        this._fetchTeachers()
+    }
+
     _fetchTeachers = async () => {
         const { teachers } = this.state
         const { limit, page } = teachers
-        const { data, message } = await getTeachers({ limit: 0, page })
+        const { data, message } = await getTeachers({ limit: 0, page, name: teachers.name })
         if (message) return alert(message)
         this.setState({
             teachers: {
@@ -122,6 +136,9 @@ class Teachers extends Component {
                     <TeacherModal teacher={current.teacher} departments={departments} onToggle={this._toggle} onSave={this._onSave} />
                 </Modal>}
                 <div className="TopButtons">
+                    <form onSubmit={this._submitSearch}>
+                        <Input value={teachers.name} onChange={this._onChangeSearch('name')} label="Tìm kiếm theo tên" />
+                    </form>
                     <button className="UserButton" onClick={this._onClickNewTeacher}>Thêm giảng viên</button>
                 </div>
 

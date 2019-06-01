@@ -3,13 +3,17 @@ import { getCookie, removeCookie } from '../cookies'
 
 const baseUrl = process.env.REACT_APP_BACKEND || 'https://u-faculties-backend.herokuapp.com'
 
-export const createApiService = async ({ url, method, data, params }) => {
+export const createApiService = async ({ url, method, data, params, authorization }) => {
+    const Authorization = `Bearer ${authorization}`
     try {
         const resp = await axios({
             url: `${baseUrl}${url}`,
             method,
             data,
             params,
+            headers: {
+                Authorization,
+            }
         })
 
         return resp.data

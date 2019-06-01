@@ -1,5 +1,12 @@
 import { createApiService, createAuthApiService } from './index'
 
+export const getAllFields = () => {
+    return createApiService({
+        url: `/fields/all`,
+        method: 'get'
+    })
+}
+
 export const getFields = (args) => {
     return createApiService({
         method: 'get',

@@ -12,6 +12,7 @@ import { verifyUser } from './services/api/AuthServices'
 import UserRouterContainer from './containers/user-router/components/UserRouterContainer'
 import TeacherRouterContainer from './containers/teacher-router/components/TeacherRouterContainer'
 import HomepageTeacherContainer from './containers/homepage-teacher/components/HomepageTeacherContainer'
+import NewUserContainer from './containers/new-user/components/NewUserContainer';
 
 class App extends Component {
     state = {
@@ -59,6 +60,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' component={HomePageContainer} />
                         <Route exact path='/teacher-info/:id' component={HomepageTeacherContainer} />
+                        <Route exact path='/newUser' component={NewUserContainer} />
                         {user.token && type === 'admin' && <UserRouterContainer />}
                         {user.token && type === 'teacher' && <TeacherRouterContainer />}
                         <Redirect from='*' to='/' />

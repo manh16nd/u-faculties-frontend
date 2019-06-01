@@ -171,9 +171,9 @@ const UserFields = function (props) {
                             {field.name}
                         </span>}
                     <div className="Buttons">
-                        <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
-                        <button className="UserButton" onClick={_onClickAddChild(field)}>Add sub</button>
-                        <button className="UserButton" onClick={_onClickRemove(field)}>Remove</button>
+                        <button className="UserButton" onClick={_onClickChange(field)}>Sửa thông tin</button>
+                        <button className="UserButton" onClick={_onClickAddChild(field)}>Thêm lĩnh vực con</button>
+                        <button className="UserButton DangerButton" onClick={_onClickRemove(field)}>Xóa</button>
                     </div>
                 </div>
                 {!!flatEntity[field._id] &&
@@ -203,9 +203,9 @@ const UserFields = function (props) {
 
                         <div className="FieldButtons">
                             <div className="Buttons">
-                                <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
-                                <button className="UserButton" onClick={_onClickAddChild(field)}>Add sub</button>
-                                <button className="UserButton" onClick={_onClickRemove(field)}>Remove</button>
+                                <button className="UserButton" onClick={_onClickChange(field)}>Sửa thông tin</button>
+                                <button className="UserButton" onClick={_onClickAddChild(field)}>Thêm lĩnh vực con</button>
+                                <button className="UserButton DangerButton" onClick={_onClickRemove(field)}>Xóa</button>
                             </div>
                             <span onClick={_expand(field._id)} className="ExpandButton"><i className="ti-angle-down" /></span>
                         </div>

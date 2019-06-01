@@ -1,6 +1,24 @@
 .HomePage {
+    .Greeting {
+        margin: -20px -15px 30px;
+        background-image: linear-gradient(to right top, #004783, #005d92, #00739c, #1288a4, #3f9caa);
+        color: #fff;
+        padding: 3rem 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        .TitleGreeting {
+            font-size: 3rem;
+            font-weight: 100;
+            font-family: 'Nunito', sans-serif;
+        }
+    }
+
     .LeftWrapper {
         margin-top: 20px;
+
         .TopTable {
             display: flex;
             justify-content: space-between;
@@ -12,6 +30,7 @@
 
             form {
                 width: 50%;
+
                 input {
                     width: 100%;
                     border: 1px solid #E0E9EF;

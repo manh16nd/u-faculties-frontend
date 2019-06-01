@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {getTeachers} from '../../../services/api/TeachersServices'
+import React, { Component } from 'react'
+import { getTeachers } from '../../../services/api/TeachersServices'
 import TeachersTable from './TeachersTable'
 import DepartmentsTable from './DepartmentsTable'
 import FieldsTable from './FieldsTable'
 import Filter from './Filter'
-import {getDepartments} from '../../../services/api/DepartmentsServices';
-import {getFields} from '../../../services/api/FieldsServices';
+import { getDepartments } from '../../../services/api/DepartmentsServices'
+import { getAllFields } from '../../../services/api/FieldsServices'
 
 class HomePage extends Component {
     state = {
@@ -50,20 +50,20 @@ class HomePage extends Component {
     }
 
     _fetchTeachers = async () => {
-        const {params} = this.state.teachers
+        const { params } = this.state.teachers
         this.setState({
             loading: {
                 fetchTeachers: true,
             }
         })
 
-        const {success, data, message} = await getTeachers(params)
+        const { success, data, message } = await getTeachers(params)
 
         const teachersEntity = data ? {
             entity: data.teachers,
             total: data.total,
         } : {}
-        this.setState(({teachers, loading}) => ({
+        this.setState(({ teachers, loading }) => ({
             loading: {
                 ...loading,
                 fetchTeachers: false,
@@ -78,20 +78,20 @@ class HomePage extends Component {
     }
 
     _fetchDepartments = async () => {
-        const {params} = this.state.departments
+        const { params } = this.state.departments
         this.setState({
             loading: {
                 fetchDepartments: true,
             }
         });
 
-        const {success, data, message} = await getDepartments(params)
+        const { success, data, message } = await getDepartments(params)
 
         const departmentsEntity = data ? {
             entity: data.departments,
             total: data.total,
         } : {}
-        this.setState(({departments, loading}) => ({
+        this.setState(({ departments, loading }) => ({
             loading: {
                 ...loading,
                 fetchDepartments: false,
@@ -106,20 +106,20 @@ class HomePage extends Component {
     }
 
     _fetchFields = async () => {
-        const {params} = this.state.fields
+        const { params } = this.state.fields
         this.setState({
             loading: {
                 fetchFields: true,
             }
         });
 
-        const {success, data, message} = await getFields(params)
+        const { success, data, message } = await getAllFields(params)
 
         const fieldsEntity = data ? {
             entity: data.fields,
             total: data.total,
         } : {}
-        this.setState(({fields, loading}) => ({
+        this.setState(({ fields, loading }) => ({
             loading: {
                 ...loading,
                 fetchFields: false,
@@ -128,14 +128,16 @@ class HomePage extends Component {
                 ...fields,
                 ...fieldsEntity,
             },
-        }))
+        }), () => {
+            console.log(this.state.fields)
+        })
 
         if (!success) return alert(message)
     }
 
     _onChangeFilterName = (e) => {
-        const {value} = e.target
-        this.setState(({teachers}) => ({
+        const { value } = e.target
+        this.setState(({ teachers }) => ({
             teachers: {
                 ...teachers,
                 params: {
@@ -146,9 +148,21 @@ class HomePage extends Component {
         }))
     }
 
+    select = (key, value) => {
+        this.setState(({ teachers }) => ({
+            teachers: {
+                ...teachers,
+                params: {
+                    ...teachers.params,
+                    [key]: value,
+                }
+            },
+        }), () => this._fetchTeachers())
+    }
+
     _onChangeFilterNameDepartment = (e) => {
-        const {value} = e.target
-        this.setState(({departments}) => ({
+        const { value } = e.target
+        this.setState(({ departments }) => ({
             departments: {
                 ...departments,
                 params: {
@@ -160,8 +174,8 @@ class HomePage extends Component {
     }
 
     _onChangeFilterNameField = (e) => {
-        const {value} = e.target
-        this.setState(({fields}) => ({
+        const { value } = e.target
+        this.setState(({ fields }) => ({
             fields: {
                 ...fields,
                 params: {
@@ -180,10 +194,16 @@ class HomePage extends Component {
     }
 
     render() {
-        const {teachers, departments, fields} = this.state
+        const { teachers, departments, fields } = this.state
 
         return (
             <div className="HomePage">
+                <div className="Greeting">
+                    <div className="TitleGreeting">
+                        Hệ thống thông tin giảng viên - uFaculties
+                    </div>
+                </div>
+
                 <div className="row">
                     <div className='col-8 LeftWrapper'>
                         <div className="TopTable">
@@ -204,7 +224,8 @@ class HomePage extends Component {
                     </div>
 
                     <div className="col-4 RightWrapper">
-                        <Filter/>
+                        <Filter
+                            select={this.select} />
                     </div>
                 </div>
 
@@ -246,7 +267,7 @@ class HomePage extends Component {
                     </div>
                 </div>
 
-            </div>
+            </div >
         )
     }
 }

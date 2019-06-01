@@ -29,3 +29,12 @@ export const changePassword = ({ username, oldPassword, password }) => {
         data: { username, password, oldPassword }
     })
 }
+
+export const newUser = ({ username, password, token }) => {
+    return createApiService({
+        method: 'post',
+        url: '/auth/changePassword',
+        data: { username, password },
+        authorization: token
+    })
+}

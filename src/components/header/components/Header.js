@@ -17,6 +17,7 @@ class Header extends Component {
         removeCookie('type')
         removeCookie('username')
         removeCookie('teacher')
+        window.location.href = '/'
     }
 
     render() {
@@ -28,7 +29,7 @@ class Header extends Component {
                     <Link to={'/'}>
                         <img className="Logo" src="images/uet.jpg" alt="UET-LOGO" />
                     </Link>
-                    <span className="Title">Trường Đại học Công nghệ - uFaculties</span>
+                    <span className="Title">Trường Đại học Công nghệ</span>
                     {user.type && user.type !== 'teacher' && <span className="Title">- Quản lý</span>}
                 </div>
                 <div className="RightHeader">

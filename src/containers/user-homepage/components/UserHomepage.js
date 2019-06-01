@@ -30,13 +30,13 @@ class UserHomepage extends Component {
                 <div className="Section">
                     <div className="SectionWrapper">
                         <div className="SectionHeader">
-                            Bộ môn
+                            Đơn vị
                     </div>
                         <div className="SectionBody">
                             <div className="SectionLink">
                                 <Link to='/user/departments'>
                                     <i className="ti-arrow-right ArrowIcon" />
-                                    <span className="Text">Quản lý bộ môn</span>
+                                    <span className="Text">Quản lý đơn vị</span>
                                 </Link>
                             </div>
                         </div>

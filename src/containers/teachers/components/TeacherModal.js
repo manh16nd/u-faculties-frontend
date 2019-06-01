@@ -42,7 +42,7 @@ const TeacherModal = (props) => {
         changeAvatarLoading(true)
         const { success, message } = await uploadTeacherAvatar({ teacherId: teacher._id, avatar: formData })
 
-        if (success) alert(true)
+        if (success) alert('Upload thành công')
         changeAvatarLoading(false)
         if (message) alert(message)
     }
@@ -92,8 +92,10 @@ const TeacherModal = (props) => {
                 </div>
                 {!!teacher._id &&
                     <div className="col-6">
-                        <img src={avatarFile || teacher.avatar} alt="teacher-avatar" />
-                        <input type="file" ref={input => avatarInput = input} className="HiddenInput" onChange={onChangeFile} />
+                        <div className="Avatar">
+                            <img src={teacher.avatar} alt="teacher-avatar" />
+                            <input type="file" ref={input => avatarInput = input} className="HiddenInput" onChange={onChangeFile} />
+                        </div>
                     </div>}
             </form>
         </div>

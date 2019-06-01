@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {getDepartments} from '../../../services/api/DepartmentsServices'
+import React, { Component } from 'react'
+import { getDepartments } from '../../../services/api/DepartmentsServices'
 import classnames from 'classnames'
-import {getFields} from '../../../services/api/FieldsServices'
+import { getAllTopics } from '../../../services/api/TopicsServices'
 
 class Filter extends Component {
     state = {
@@ -25,6 +25,10 @@ class Filter extends Component {
                 name: '',
             },
             loading: false,
+        },
+        s: {
+            'departments': '',
+            'fields': '',
         }
     }
 
@@ -34,15 +38,15 @@ class Filter extends Component {
     }
 
     _fetchFields = async () => {
-        const {fields} = this.state
-        const {params} = fields
+        const { fields } = this.state
+        const { params } = fields
         this.setState(({
             fields: {
                 ...fields,
                 loading: true,
             }
         }))
-        const {success, data, message} = await getFields(params)
+        const { success, data, message } = await getAllTopics(params)
         if (!success) {
             this.setState({
                 fields: {
@@ -56,7 +60,7 @@ class Filter extends Component {
         this.setState({
             fields: {
                 ...fields,
-                entity: data.fields,
+                entity: data.topics,
                 total: data.total,
                 loading: false,
             }
@@ -64,15 +68,15 @@ class Filter extends Component {
     }
 
     _fetchDepartments = async () => {
-        const {departments} = this.state
-        const {params} = departments
+        const { departments } = this.state
+        const { params } = departments
         this.setState({
             departments: {
                 ...departments,
                 loading: true,
             }
         })
-        const {success, data, message} = await getDepartments(params)
+        const { success, data, message } = await getDepartments(params)
         if (!success) {
             this.setState({
                 departments: {
@@ -94,7 +98,7 @@ class Filter extends Component {
     }
 
     _onChangeSearch = (e) => {
-        const {value} = e.target
+        const { value } = e.target
         const key = this.state.selected
         const field = this.state[key]
         const newField = {
@@ -118,13 +122,21 @@ class Filter extends Component {
 
     _onSubmitSearch = (e) => {
         e.preventDefault()
-        const {selected} = this.state
+        const { selected } = this.state
         if (selected === 'departments') return this._fetchDepartments()
         return this._fetchFields()
     }
 
+    _onSelect = (key) => () => {
+        const { selected } = this.state
+        this.setState(({ s }) => ({
+            s: { ...s, [selected]: key }
+        }))
+        this.props.select(selected === 'departments' ? 'department' : 'topics', key)
+    }
+
     render() {
-        const {departments, fields, selected} = this.state
+        const { departments, fields, selected, s } = this.state
         const suggestions = selected === 'departments' ? departments.entity : fields.entity
         const value = selected === 'departments' ? departments.params.name : fields.params.name
         const loading = departments.loading || fields.loading
@@ -132,26 +144,34 @@ class Filter extends Component {
         return (
             <div>
                 <div className="FilterWrapper">
-                        <span
-                            onClick={this._selectFilter('departments')}
-                            className={classnames({'Selected': selected === 'departments'})}>Đơn vị công tác</span>
+                    <span
+                        onClick={this._selectFilter('departments')}
+                        className={classnames({ 'Selected': selected === 'departments' })}>Đơn vị công tác</span>
                     <span
                         onClick={this._selectFilter('fields')}
-                        className={classnames({'Selected': selected === 'fields'})}
-                    >Lĩnh vực quan tâm</span>
+                        className={classnames({ 'Selected': selected === 'fields' })}
+                    >Chủ đề quan tâm</span>
                 </div>
                 <div className="Filter">
                     <form onSubmit={this._onSubmitSearch}>
                         <input className="FilterInput" placeholder="Tìm kiếm theo tên" value={value}
-                               onChange={this._onChangeSearch}/>
+                            onChange={this._onChangeSearch} />
                     </form>
                     <div className="Suggestions">
-                        <div className="Suggestion">Tất cả</div>
+                        <div className="Suggestion" onClick={this._onSelect('')}
+                            style={{
+                                background: s[selected] === '' && '#e6f7ff'
+                            }}
+                        >Tất cả</div>
                         {loading ? <div className="Suggestion LoadingWrapper">
                             <div className="spinner-border AppColor" role="status">
                                 <span className="sr-only">Loading...</span>
                             </div>
-                        </div> : suggestions.map((suggestion) => <div className="Suggestion" key={suggestion._id}>
+                        </div> : suggestions.map((suggestion) => <div className="Suggestion" onClick={this._onSelect(suggestion._id)} key={suggestion._id}
+                            style={{
+                                background: s[selected] === suggestion._id && '#e6f7ff'
+                            }}
+                        >
                             {suggestion.name}
                         </div>)}
                     </div>
