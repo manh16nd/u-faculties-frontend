@@ -1,0 +1,22 @@
+.Select {
+    label {
+        width: 100%;
+        margin: 0;
+    }
+
+    select {
+        width: 100%;
+        border-radius: .25rem;
+        border: 1px solid #E0E9EF;
+        outline: none;
+        padding: .375rem .75rem;
+        appearance: none;
+        background: #fff;
+        transition: all .2s linear;
+
+        &:focus {
+            border-color: #004783;
+            box-shadow: 0 13px 28px 0 rgba(0, 71, 131, 0.25);
+        }
+    }
+}

@@ -11,6 +11,7 @@ const Select = function (props) {
     const changeDefault = () => {
         if (!options.length) return
         onChange(options[0].value)
+        console.log("TCL: changeDefault -> options", options[0].value)
     }
 
     const change = (e) => {

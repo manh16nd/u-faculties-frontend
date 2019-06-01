@@ -7,10 +7,10 @@ const Input = function (props) {
         props.onChange(value)
     }
 
-    const { value, label, id, type, required, onKeyDown } = props
+    const { value, label, id, type, required } = props
 
     const _onKeyDown = (e) => {
-        onKeyDown(e)
+
     }
 
     return (
@@ -26,6 +26,7 @@ Input.defaultProps = {
     type: 'text',
     label: '',
     onKeyDown: () => { },
+    ref: (e) => { },
 }
 
 Input.propTypes = {
@@ -35,7 +36,7 @@ Input.propTypes = {
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,
     required: PropTypes.bool,
-    onKeyDown: PropTypes.func,
+    onKeyDown: PropTypes.func
 }
 
 export default Input

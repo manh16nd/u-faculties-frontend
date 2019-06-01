@@ -31,10 +31,16 @@ const AdminDepartmentsTable = function (props) {
         setEdit({ ...edit, [key]: value })
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-
+    const _onClickSave = () => {
         onChange(edit)
+        setEdit({})
+    }
+
+    const _onKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            e.preventDefault()
+            return _onClickSave()
+        }
     }
 
     const _onClickRemove = (department) => () => {
@@ -47,15 +53,19 @@ const AdminDepartmentsTable = function (props) {
 
         return (
             <tr key={department._id || 1}>
-                <td>{isEdit ? <Input required id="department-name" value={edit.name || ''} onChange={onChangeInput('name')} /> : department.name}</td>
-                <td>{isEdit ? <Select required id="department-type" value={edit.department || ''} onChange={onChangeInput('type')} options={parsedTypes} /> : department.type}</td>
-                <td>{isEdit ? <Input required id="department-phone" value={edit.phone || ''} onChange={onChangeInput('phone')} /> : department.phone}</td>
-                <td>{isEdit ? <Input required id="department-address" value={edit.address || ''} onChange={onChangeInput('address')} /> : department.address}</td>
-                <td>{isEdit ? <Input required id="department-website" value={edit.website || ''} onChange={onChangeInput('website')} /> : department.website}</td>
+                <td>{isEdit ? <Input onKeyDown={_onKeyDown} required id="department-name" value={edit.name || ''} onChange={onChangeInput('name')} /> : <span
+                    onClick={onClickChange(department)} className="TableRow"
+                >
+                    {department.name}
+                </span>}</td>
+                <td>{isEdit ? <Select required id="department-type" value={edit.type || ''} onChange={onChangeInput('type')} options={parsedTypes} /> : department.type}</td>
+                <td>{isEdit ? <Input onKeyDown={_onKeyDown} required id="department-phone" value={edit.phone || ''} onChange={onChangeInput('phone')} /> : department.phone}</td>
+                <td>{isEdit ? <Input onKeyDown={_onKeyDown} required id="department-address" value={edit.address || ''} onChange={onChangeInput('address')} /> : department.address}</td>
+                <td>{isEdit ? <Input onKeyDown={_onKeyDown} required id="department-website" value={edit.website || ''} onChange={onChangeInput('website')} /> : department.website}</td>
                 <td>
                     <div className="ActionsWrapper">
                         {(isEdit) ? <div>
-                            <button className="UserButton mr-2" type="submit">
+                            <button className="UserButton mr-2" type="submit" onClick={_onClickSave}>
                                 <i className="ti-save" />
                             </button>
                             <button className="UserButton" onClick={onClickChange({})}>
@@ -79,24 +89,22 @@ const AdminDepartmentsTable = function (props) {
         <div className="AdminDepartmentsTable">
 
             <div className="TableWrapper">
-                <form onSubmit={onSubmit}>
-                    <table className="Table">
-                        <thead>
-                            <tr>
-                                <th>Tên Khoa</th>
-                                <th>Loại</th>
-                                <th>Điện thoại</th>
-                                <th>Địa chỉ</th>
-                                <th>Website</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
+                <table className="Table">
+                    <thead>
+                        <tr>
+                            <th>Tên Khoa</th>
+                            <th>Loại</th>
+                            <th>Điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Website</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
-                            {departments.map((department, id) => renderDepartment(department, id))}
-                        </tbody>
-                    </table>
-                </form>
+                    <tbody>
+                        {departments.map((department, id) => renderDepartment(department, id))}
+                    </tbody>
+                </table>
             </div>
         </div>
     )

@@ -164,7 +164,12 @@ const UserFields = function (props) {
                 <div className="FieldTitle">
                     {isEditting ? <form onSubmit={_onSubmit}>
                         <Input id={current._id} value={current.name} onChange={_onChangeInput} onKeyDown={_onKeyDownInput} />
-                    </form> : <span onClick={_expand(field._id)}>{field.name}</span>}
+                    </form> : <span onClick={_expand(field._id)}>
+                            <span className="ExpandIcon mr-3">
+                                <i className={flatEntity[field._id] ? 'fas fa-angle-right' : 'fas fa-angle-down'} />
+                            </span>
+                            {field.name}
+                        </span>}
                     <div className="Buttons">
                         <button className="UserButton" onClick={_onClickChange(field)}>Change</button>
                         <button className="UserButton" onClick={_onClickAddChild(field)}>Add sub</button>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import AdminDepartmentsTable from './AdminDepartmentsTable'
+import Modal from '../../../components/modal/components/Modal'
 import { getDepartments, getDepartmentTypes, editDepartment, addDepartment, removeDepartment } from '../../../services/api/DepartmentsServices'
+import NewDepartment from './NewDepartment';
 
 const AdminDepartments = function (props) {
     const [departments, setDepartments] = useState({
@@ -12,6 +14,8 @@ const AdminDepartments = function (props) {
         types: [],
         limit: 10,
     })
+
+    const [_new, _setNew] = useState(null)
 
     useEffect(() => {
         fetchData()
@@ -66,14 +70,19 @@ const AdminDepartments = function (props) {
     }
 
     const _addNewDepartment = () => {
-        const { entity } = departments
-        const first = entity[0] || null
-        if (!first || !first._id) return
+        _setNew(true)
+    }
 
-        setDepartments({
-            ...departments,
-            entity: [{}, ...entity]
-        })
+    const _toggleNewDepartment = () => {
+        _setNew(null)
+    }
+
+    const _submitNewDepartment = async (department) => {
+        console.log("TCL: _submitNewDepartment -> department", department)
+        const { success, message } = await addDepartment(department)
+        if (!success) return alert(message)
+        fetchData()
+        _setNew(!success)
     }
 
     return (
@@ -82,13 +91,16 @@ const AdminDepartments = function (props) {
                 <div className="CardHeader">
                     <div className="AdminDepartmentsHeader">
                         <div className="Title">
-                            <Link class="BackButton" to="/user"><i class="ti-arrow-left"></i></Link>
+                            <Link className="BackButton" to="/user"><i className="ti-arrow-left"></i></Link>
                             Quản lý đơn vị
                         </div>
                         <button className="UserButton" onClick={_addNewDepartment}>Thêm đơn vị mới</button>
                     </div>
                 </div>
             </div>
+            {!!_new && <Modal title="Thêm đơn vị mới" onToggle={_toggleNewDepartment}>
+                <NewDepartment onSubmit={_submitNewDepartment} types={departments.types} />
+            </Modal>}
             <AdminDepartmentsTable departments={departments.entity || []} types={departments.types} onChange={onChangeDepartment} onRemove={_onRemoveDepartment} />
         </div>
     )

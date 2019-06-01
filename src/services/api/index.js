@@ -22,7 +22,7 @@ export const createApiService = async ({ url, method, data, params }) => {
 }
 
 export const createAuthApiService = async ({ url, method, data, params, contentType }) => {
-    const Authorization = getCookie('token')
+    const Authorization = `Bearer ${getCookie('token')}`
     const content = contentType ? {
         'Content-Type': contentType
     } : {}

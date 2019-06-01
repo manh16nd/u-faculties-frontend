@@ -27,6 +27,14 @@ export const editTeacherInfo = ({ teacherId, data }) => {
     })
 }
 
+export const createNewTeacher = (data) => {
+    return createAuthApiService({
+        url: `/teachers`,
+        method: 'post',
+        data
+    })
+}
+
 export const getTeacherTopics = ({ teacherId, params }) => {
     return createAuthApiService({
         url: `/teachers/${teacherId}/topics`,
