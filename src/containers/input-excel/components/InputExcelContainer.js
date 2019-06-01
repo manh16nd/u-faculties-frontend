@@ -4,7 +4,7 @@ import InputExcel from './InputExcel';
 const InputExcelContainer = function (props) {
     return (
         <div className="TeacherInfoContainer container">
-            <InputExcel />
+            <InputExcel {...props} />
         </div>
     )
 }
