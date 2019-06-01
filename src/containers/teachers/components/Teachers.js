@@ -74,6 +74,10 @@ class Teachers extends Component {
         })
     }
 
+    _onClickDelete = (teacher) => async () => {
+        if (!window.confirm('Bạn muốn xóa tài khoản của: ' + teacher.name + ' ?')) return
+    }
+
     _toggle = () => {
         this.setState({
             current: {
@@ -84,13 +88,18 @@ class Teachers extends Component {
     }
 
     _onSave = async (teacher) => {
-        console.log("TCL: Teachers -> _onSave -> teacher", teacher)
-        return 
+        const { departments } = this.state
+
+        const newTeacher = {
+            department: departments && departments.length ? departments[0]._id : null,
+            ...teacher
+        }
+
         const request = (teacher._id) ? editTeacherInfo({
             teacherId: teacher._id,
-            data: teacher
+            data: newTeacher
         }) : createNewTeacher({
-            ...teacher,
+            ...newTeacher,
             username: teacher.email,
         })
 
@@ -148,6 +157,7 @@ class Teachers extends Component {
                                         <td>{teacher.position}</td>
                                         <td>
                                             <button className="UserButton" onClick={this._onClickEdit(teacher)}>Sửa tài khoản</button>
+                                            <button className="UserButton" onClick={this._onClickDelete(teacher)}>Xóa tài khoản</button>
                                         </td>
                                     </tr>
                                 )

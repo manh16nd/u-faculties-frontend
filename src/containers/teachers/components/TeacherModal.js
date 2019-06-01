@@ -14,7 +14,7 @@ const TeacherModal = (props) => {
     useEffect(() => {
         console.log(_teacher)
     }, [_teacher])
-    
+
     const _mapPropToState = () => _setTeacher({ ...teacher })
 
     const _onSubmit = (e) => {
@@ -23,7 +23,6 @@ const TeacherModal = (props) => {
     }
 
     const _onChangeInput = (key) => (value) => {
-        console.log("TCL: _onChangeInput -> key", key)
         _setTeacher({
             ..._teacher,
             [key]: value,
