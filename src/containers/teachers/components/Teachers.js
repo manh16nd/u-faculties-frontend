@@ -159,8 +159,12 @@ class Teachers extends Component {
                                         <td>{teacher.degree}</td>
                                         <td>{teacher.position}</td>
                                         <td>
-                                            <button className="UserButton mr-2" onClick={this._onClickEdit(teacher)}>Sửa tài khoản</button>
-                                            <button className="UserButton DangerButton" onClick={this._onClickDelete(teacher)}>Xóa tài khoản</button>
+                                            <button className="UserButton mr-2" onClick={this._onClickEdit(teacher)}>
+                                                <i className="ti-pencil" />
+                                            </button>
+                                            <button className="UserButton DangerButton" onClick={this._onClickDelete(teacher)}>
+                                                <i className="ti-trash" />
+                                            </button>
                                         </td>
                                     </tr>
                                 )
