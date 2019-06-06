@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getCookie, removeCookie } from '../cookies'
 
-const baseUrl = process.env.REACT_APP_BACKEND || 'https://u-faculties-backend.herokuapp.com'
+const baseUrl = process.env.REACT_APP_BACKEND || 'http://127.0.0.1:3000'
 
 export const createApiService = async ({ url, method, data, params, authorization }) => {
     const Authorization = `Bearer ${authorization}`
